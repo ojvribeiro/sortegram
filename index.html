@@ -51,9 +51,11 @@ Sortegram
 
 <div id="sidebar-overlay"></div>
 <div id="sidebar" class="close">
-<div class="sidebar-op" onclick="novo()">Novo Sorteio</div>
-<div class="sidebar-op">Último sorteio</div>
-<div class="sidebar-op" onclick="window.localStorage.clear(); window.location.reload()">Limpar dados</div>
+  <div class="sidebar-ops">
+    <div class="sidebar-op" onclick="novo()">Novo Sorteio</div>
+    <div class="sidebar-op">Último sorteio</div>
+    <div class="sidebar-op" onclick="window.localStorage.clear(); window.location.reload()">Limpar dados</div>
+  </div>
 </div>
 
 
@@ -77,9 +79,9 @@ Sortegram
   <span></span>
 </div>
 </div><!-- .min-max -->
-<input onclick="go()" id="generate" class="sort-btn" type="button" value="Sortear" />
+<button onclick="SCgo()" id="generate" class="sort-btn">Sortear</button>
 <div id="current"></div>
-<button onclick="SCnew()" class="SCnew-btn no-display">Novo Sorteio</button>
+<button onclick="SCnew()" class="new-btn no-display">Novo Sorteio</button>
 <div id="result" class="no-display">Resultado</div>
 </div><!-- #classic -->
 
@@ -94,12 +96,16 @@ Sortegram
   <span id="number-of-participants"></span> participante<span id="part-plural"></span>
   <dl id="user-names"></dl>
   <button id="delete-all" onclick="sgRemoveAll()">Remover todos</button>
-  <button class="sg-save" onclick="">Salvar</button>
+  <button id="sg-save" onclick="">Avançar</button>
 </div><!-- #sortegram -->
 
 <div id="start-sortegram" class="close">
-  <span id="number-of-participants-2"></span> participante<span id="part-plural"></span>
+  <button onclick="SSgo()" id="ss-generate" class="sort-btn">Sortear</button>
+  <div id="SScurrent"></div>
+  <div id="SSresult" class="no-display">Resultado</div>
+  <span id="number-of-participants-2"></span> participante<span id="part-plural-2"></span>
   <dl id="user-names-2"></dl>
+  <button onclick="SSnew()" class="new-btn no-display">Novo Sorteio</button>
 </div><!-- #sortegram -->
 
 
