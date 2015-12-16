@@ -8,6 +8,7 @@ body {
   -ms-user-select: none;
   -o-user-select: none;
   margin: 0;
+  overflow-x: hidden;
 }
 
 input {
@@ -54,7 +55,7 @@ input {
   background-size: 80%;
   background-position: 50% 1%;
   background-repeat: no-repeat;
-  background-color: #0B733D;
+  background-color: #049410;
   width: 140px;
   height: 140px;
   position: relative;
@@ -67,7 +68,7 @@ input {
   -o-transform: translate(-50%,-50%);
 }
 #classic-raffle:active {
-  background-color: rgba(46, 197, 118, 0.8);
+  background-color: #24C331;
 }
 #classic-raffle::after {
   content: "Sorteio clássico";
@@ -96,7 +97,7 @@ input {
   -o-transform: translate(-50%,-50%);
 }
 #sortegram-raffle:active {
-  background-color: #2FE83E;
+  background-color: #24C331;
 }
 #sortegram-raffle::after {
   content: "Sorteio Sortegram";
@@ -304,9 +305,9 @@ input {
 
 #classic {
   color: #fff;
-  background-color: rgba(84, 84, 84, 0.76);
-  width: 99%;
-  max-width: 99%;
+  background-color: rgba(84, 84, 84, 0.7);
+  width: 100%;
+  max-width: 100%;
   min-width: 90%;
   min-height: 75%;
   text-align: center;
@@ -357,17 +358,14 @@ input {
   color: #fff;
   width: 100%;
   max-width: 100%;
-  min-height: calc(100% - 70px);
-  min-height: -webkit-calc(100% - 70px);
-  min-height: -moz-calc(100% - 70px);
-  min-height: -ms-calc(100% - 70px);
-  min-height: -o-calc(100% - 70px);
+  min-height: 100%;
+  min-height: 100%;
+  min-height: 100%;
+  min-height: 100%;
+  min-height: 100%;
   text-align: center;
   position: absolute;
   top: 0;
-  margin-left: 0px;
-  padding: 0px;
-  padding-top: 70px;
   transition: .2s ease;
   -webkit-transition: .2s ease;
   -moz-transition: .2s ease;
@@ -416,6 +414,7 @@ input {
 
 .sort-btn {
   position: relative;
+    margin-top: 60px;
     bottom: 0%;
     left: 0%;
     font-size: 30pt;
@@ -423,8 +422,7 @@ input {
     color: #fff;
     border: 5px solid #38D245;
     width: 100%;
-    padding: 23px;
-    margin-top: 16px;
+    padding: 10px;
     transition: .1s ease;
     -webkit-transition: .1s ease;
     -moz-transition: .1s ease;
@@ -513,23 +511,20 @@ input {
 }
 
 #SSresult {
-  background-color: rgba(236, 248, 255, 0.5);
+  margin-top: 60px;
   color: #FFFFFF;
-  box-shadow: 0 7px 15px rgba(0, 0, 0, 0.23);
-  -webkit-box-shadow: 0 7px 15px rgba(0, 0, 0, 0.23);
-  -moz-box-shadow: 0 7px 15px rgba(0, 0, 0, 0.23);
-  -ms-box-shadow: 0 7px 15px rgba(0, 0, 0, 0.23);
-  -o-box-shadow: 0 7px 15px rgba(0, 0, 0, 0.23);
   font-size: 30pt;
-  text-align: center;
+  text-align: left;
   padding: 10px;
-  width: 100%;
-  max-width: calc(100% - 16px);
-  height: auto;
+  padding-left: 90px;
+  width: calc(100% - 90px);;
+  max-width: calc(100% - 90px);
+  height: 53px;
+  max-height: 76px;
   min-height: 50px;
-  border-top: 3px solid #fff;
   border-bottom: 3px solid #fff;
   word-wrap: break-word;
+  overflow: hidden;
   transition: 1s ease;
   -webkit-transition: 1s ease;
   -moz-transition: 1s ease;
@@ -678,6 +673,19 @@ input {
   -o-transition: .2s ease;
 }
 
+.dt-text {
+    width: calc(100% - 110px);
+    height: 15px;
+    padding: 15px;
+    padding-left: 0;
+    padding-right: 0;
+    margin-top: -15px;
+    margin-left: 50px;
+    white-space: nowrap;
+    overflow-y: hidden;
+    overflow-x: auto;
+}
+
 #user-names dt:before {
 	content: counter(user-luck-number);
 	counter-increment: user-luck-number;
@@ -687,16 +695,16 @@ input {
   float: left;
   padding-bottom: 16px;
   font-size: 11pt;
+  max-width: 5px;
 }
 
 #user-names-2 {
   counter-reset: user-luck-number;
-  line-height: .2;
+  line-height: 1;
   text-align: left;
   position: relative;
   width: 100%;
   max-height: 170px;
-  overflow-y: hidden;
   transition: .2s ease;
   -webkit-transition: .2s ease;
   -moz-transition: .2s ease;
@@ -732,24 +740,30 @@ input {
 }
 
 #number-of-participants {
-  color: #99FFFB;
-  font-size: 14pt;
+    color: #99FFFB;
+    font-size: 14pt;
 }
 
 #number-of-participants-2 {
-  color: #99FFFB;
-  font-size: 14pt;
+    color: #99FFFB;
+    font-size: 14pt;
 }
 
 #delete-all {
-  font-size: 12pt;
-  color: #fff;
-  border: 0;
-  height: 60px;
-  width: 45%;
-  background-color: #FF6666;
+    font-size: 12pt;
+    color: #fff;
+    border: 0;
+    height: 60px;
+    width: 45%;
+    background-color: #FF6666;
+    transition: .1s ease;
+    -webkit-transition: .1s ease;
+    -moz-transition: .1s ease;
+    -ms-transition: .1s ease;
+    -o-transition: .1s ease;
 }
 #delete-all:active {
+    background-color: #9A3E3E;
     transform: scale(.9);
     -webkit-transform: scale(.9);
     -moz-transform: scale(.9);
@@ -758,22 +772,23 @@ input {
 }
 
 .delete-user {
-  background-color: rgba(0, 0, 0, 0.3);
-  background-image: url(../img/appbar.delete.png);
-  background-size: 130%;
-  background-position: 50%;
-  background-repeat: no-repeat;
-  width: 45px;
-  height: 45px;
-  position: relative;
-  float: right;
-    margin-top: -15px;
+    background-color: rgba(0, 0, 0, 0.3);
+    background-image: url(../img/appbar.delete.png);
+    background-size: 130%;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    width: 45px;
+    height: 45px;
+    position: relative;
+    float: right;
+    right: 2px;
+    margin-top: -45px;
     margin-right: 0px;
-  transition: .1s ease;
-  -webkit-transition: .1s ease;
-  -moz-transition: .1s ease;
-  -ms-transition: .1s ease;
-  -o-transition: .1s ease;
+    transition: .1s ease;
+    -webkit-transition: .1s ease;
+    -moz-transition: .1s ease;
+    -ms-transition: .1s ease;
+    -o-transition: .1s ease;
 }
 .delete-user:active {
     transform: scale(.9);
@@ -784,32 +799,87 @@ input {
 }
 
 #sg-save {
-  padding: 10px;
-  font-size: 16pt;
-  text-align: right;
-  color: #fff;
-  border: 0;
-  background-color: #0EBD00;
-  background-image: url(../img/ic_done_white_24dp_2x.png);
-  background-size: auto 80%;
-  background-position: 10%;
-  background-repeat: no-repeat;
-  width: 45%;
-  height: 66px;
-  transition: .1s ease;
-  -webkit-transition: .1s ease;
-  -moz-transition: .1s ease;
-  -ms-transition: .1s ease;
-  -o-transition: .1s ease;
+    font-size: 13pt;
+    text-align: center;
+    color: #fff;
+    border: 0;
+    background-color: #00B0FF;
+    background-image: url(../img/appbar.save.png);
+    background-size: auto 80%;
+    background-position: 0%;
+    background-repeat: no-repeat;
+    width: 45%;
+    height: 60px;
+    transition: .1s ease;
+    -webkit-transition: .1s ease;
+    -moz-transition: .1s ease;
+    -ms-transition: .1s ease;
+    -o-transition: .1s ease;
 }
 #sg-save:active {
     background-color: #5181AF;
-    color: #D6D6D6;
     transform: scale(.9);
     -webkit-transform: scale(.9);
     -moz-transform: scale(.9);
     -ms-transform: scale(.9);
     -o-transform: scale(.9);
+}
+
+#sg-done {
+    font-size: 18pt;
+    text-align: center;
+    color: #fff;
+    border: 0;
+    background-color: #06D816;
+    background-image: url(../img/ic_arrow_forward_white_24dp_2x.png);
+    background-size: auto 80%;
+    background-position: 100%;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 60px;
+    margin-top: 10px;
+    transition: .1s ease;
+    -webkit-transition: .1s ease;
+    -moz-transition: .1s ease;
+    -ms-transition: .1s ease;
+    -o-transition: .1s ease;
+}
+#sg-done:active {
+    background-color: #5181AF;
+    transform: scale(.9);
+    -webkit-transform: scale(.9);
+    -moz-transform: scale(.9);
+    -ms-transform: scale(.9);
+    -o-transform: scale(.9);
+}
+
+#trophy {
+    display: none;
+    width: 60px;
+    height: 60px;
+    background-color: #A50000;
+    border: 3px solid #FF0000;
+    background-image: url(../img/appbar.trophy.svg);
+    background-size: auto 125%;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    position: absolute;
+    margin-left: 5px;
+    margin-top: 64px;
+}
+
+.lock-scroll {
+  overflow-y: hidden;
+}
+
+.scroll {
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .no-display {

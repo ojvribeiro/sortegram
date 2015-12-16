@@ -11,10 +11,16 @@ var generate = document.getElementById('generate'),
     inputUserNameLabel = document.getElementById('input-username-lbl'),
     scNoP = document.getElementById('number-of-participants'),
     ssNoP = document.getElementById('number-of-participants-2'),
-    savedNames = document.getElementById('user-names').innerHTML,
+    NoPdiv = document.getElementById('NoPdiv'),
+    savedNames = document.getElementById('user-names-2').innerHTML,
+    savedNamesEdit = document.getElementById('user-names').innerHTML,
+    isNew = localStorage.getItem('isNew'),
     getSavedNames = localStorage.getItem('saved-names');
 
 
+if (!localStorage['isNew']) {
+  localStorage.setItem('isNew','yes');
+}
 
 $(scNoP).html( $("#user-names > dt").size() );
 
@@ -242,30 +248,29 @@ if ( $('#user-names > dt').size() === 0 ) {
 }
 
 function sgSaveList () {
-  savedNames = document.getElementById('user-names-2').innerHTML;
     localStorage.setItem('saved-names',savedNames);
+    localStorage.setItem('saved-names-edit',savedNamesEdit);
 }
 
 // SORTEGRAM
 
 function sbmt () { // Funcao que adiciona a lista o participante
   if ( userName.value.length !== 0
-    && userName.value.match(/^@?([a-zA-Z0-9_. ]){1,30}$/g) ) {
+    && userName.value.match(/^@?([\w\W]){1,30}$/g) ) {
     downList();
         userName.blur(); userName.select();
 
-          savedNames = document.getElementById('user-names').innerHTML +=
-          "<dt>"
+          savedNamesEdit = document.getElementById('user-names').innerHTML +=
+          "<dt><div class=\"dt-text\">"
           + userName.value
-          + "<div class=\"delete-user\" \
+          + "</div><div class=\"delete-user\" \
           onclick=\"$(this).parent().remove(); \
           sgSaveList();\
           changeNumber();\"></div></dt>";
 
-          document.getElementById('user-names-2').innerHTML +=
-          "<dt>" +userName.value+ "</dt>";
+          savedNames = document.getElementById('user-names-2').innerHTML +=
+          "<dt><div class=\"dt-text\">" +userName.value+ "</div></dt>";
 
-            sgSaveList();
               changeNumber();
 }
  else {
@@ -287,11 +292,11 @@ function sbmt () { // Funcao que adiciona a lista o participante
 function SSgo () {
 // Cria uma array com a quantidade de numeros dada de modo que não se repitam
 var sortear = Math.floor(Math.random() * ((Number(ssNoP.innerHTML) - 1) + 1) + 1);
+var winner = sortear - 1;
 
     SSresult.style.color = "#888888";
     SSresult.style.backgroundColor = "#FFF";
     SSresult.style.fontSize = "38pt";
-    SSresult.style.borderRadius = "0px";
     document.getElementById('logo').innerHTML = "Sorteando...";
 
     $('#logo').removeClass('logo-blink addfadeIn').addClass('logo-blink');
@@ -304,24 +309,36 @@ var sortear = Math.floor(Math.random() * ((Number(ssNoP.innerHTML) - 1) + 1) + 1
       SSresult.style.display = "block";
       SSresult.innerHTML = Math.floor(Math.random() * ((Number(ssNoP.innerHTML) - 1) + 1) + 1);
 
-  if ( SSresult.innerHTML.length <= 5 ) {
+
+  if ( SSresult.innerHTML.length <= 10 ) {
       SSresult.style.fontSize = "30pt";
   }
-   else if ( SSresult.innerHTML.length >= 6 ) {
+   else if ( SSresult.innerHTML.length <= 19 ) {
       SSresult.style.fontSize = "20pt";
+  }
+  else if ( SSresult.innerHTML.length >= 20 ) {
+      SSresult.style.fontSize = "12pt";
   }
 }, 60);
 
+$(NoPdiv).hide();
+
+      // Bloqueia o scroll enquanto o sorteio é feito
+      $('#user-names-2').removeClass('scroll').addClass('lock-scroll');
 
 // Resultado do SS
 setTimeout(function() { // Timeout de 4s
+
+$('#user-names-2').animate({
+  scrollTop:$('#user-names-2 dt:nth-child(1)').position().top
+}, 400);
 
       clearInterval(sort); // Remove o loop de numeros
       $('.new-btn').show(); // Mostra o botao "Novo Sorteio"
               SSresult.innerHTML = sortear; // Exibe os resultados
 
               SSresult.style.color = "#FFF";
-              SSresult.style.backgroundColor = "rgba(242, 255, 0, 0.5)";
+              SSresult.style.backgroundColor = "transparent";
               SSresult.style.marginLeft = "-3px";
 
               document.getElementById('logo').innerHTML = "Resultado";
@@ -350,30 +367,49 @@ setTimeout(function() { // Timeout de 4s
       // Remove o efeito de fadeIn e rotacao e adiciona fadeIn novamente
       $('#logo').removeClass('addfadeIn logo-blink').addClass('addfadeIn');
 
-      // Mostra o nome d(o|a) participante que venceu
+      // Mostra o nome do participante que venceu
       setTimeout(function () {
-        scrollTop:$('#user-names-2 dt:nth-child(1)').position().top
-        $('#user-names-2').animate({
+        if (sortear === 1) {
+          $('#user-names-2').animate({
           scrollTop:$('#user-names-2 dt:nth-child('+sortear+')').position().top
-        }, 1000);
+          }, 1000);
+        }
+        else {
+          $('#user-names-2').animate({
+          scrollTop:$('#user-names-2 dt:nth-child('+winner+')').position().top
+          }, 1000);
+        }
 
         $('#user-names-2 dt:nth-child('+sortear+')').css({
-          'background-color':'#00FFCD',
-          'color':'#000'
+          'background-color':'#FFF',
+          'color':'#000',
+          'border':'3px solid #F00'
           });
 
-          SSresult.innerHTML = $('#user-names-2 dt:nth-child('+sortear+')').html();
-          SSresult.style.backgroundColor = "rgb(38, 167, 49)";
+
+          $('#SSresult').before('<div id=\"trophy\"><\/div>');
+          // Mostra o trofeu
+          $('#trophy').show('bounce');
+
+        // Permite o scroll quando o sorteio termina
+        $('#user-names-2').removeClass('lock-scroll').addClass('scroll');
+
+          SSresult.innerHTML = $('#user-names-2 dt:nth-child('+sortear+')').children().html();
+          SSresult.style.backgroundColor = "#37BD1E";
+          SSresult.style.boxShadow = "0px 10px 10px #0A3E00";
 
 
       // Aumenta ou diminui a fonte de acordo com o resultado
       if ( SSresult.innerHTML.length <= 10 ) {
           SSresult.style.fontSize = "30pt";
       }
-       else  {
+       else if ( SSresult.innerHTML.length <= 19 ) {
           SSresult.style.fontSize = "20pt";
       }
-    }, 2000)
+        else if ( SSresult.innerHTML.length >= 20 ) {
+      SSresult.style.fontSize = "12pt";
+      }
+    }, 2000);
 
   }, 4000);
 };
@@ -398,6 +434,11 @@ document.getElementById('sg-save').addEventListener('click', function () {
   sgSaveRaffle();
 });
 
+// Prepara o SS
+document.getElementById('sg-done').addEventListener('click', function () {
+  sgRaffleReady();
+});
+
 // Funcao para selecionar o SC
 function classicRaffle () {
   $('.new-btn').hide(); // Esconde o botao "Novo Sorteio"
@@ -409,14 +450,31 @@ function classicRaffle () {
 
 // Funcao para selecionar o SS
 function newSGRaffle () {
-  userName.value = "";
-  userName.focus();
-  $('.new-btn').hide(); // Esconde o botao "Novo Sorteio"
-  $('#start').addClass('close').removeClass('open');
-    $('#sortegram').removeClass('close').addClass('open');
-    $('#start-sortegram').addClass('close').removeClass('open');
-      document.getElementById('logo').innerHTML = "Sortegram";
-  removeAllNoConfirm();
+  // Esconde o trofeu
+  $('#trophy').hide();
+  $(NoPdiv).show();
+  SSresult.style.boxShadow = "none";
+
+  if (isNew === "yes") {
+    userName.value = "";
+    userName.focus();
+    $('.new-btn').hide(); // Esconde o botao "Novo Sorteio"
+    $('#start').addClass('close').removeClass('open');
+      $('#sortegram').removeClass('close').addClass('open');
+      $('#start-sortegram').addClass('close').removeClass('open');
+        document.getElementById('logo').innerHTML = "Adicionar";
+        removeAllNoConfirm();
+  }
+    else {
+      userName.value = "";
+      userName.focus();
+      $('.new-btn').hide(); // Esconde o botao "Novo Sorteio"
+      $('#start').addClass('close').removeClass('open');
+      $('#sortegram').removeClass('close').addClass('open');
+      $('#start-sortegram').addClass('close').removeClass('open');
+        document.getElementById('logo').innerHTML = "Adicionar";
+        savedNames = document.getElementById('user-names').innerHTML = getSavedNames;
+    }
 }
 
 // Funcao para limpar a lista de participantes
@@ -446,10 +504,22 @@ function removeAllNoConfirm () {
 
 function sgSaveRaffle () {
   if ($("#user-names > dt").size() > 1) {
+      sgSaveList();
+      changeNumber();
+      alert('Sorteio salvo!');
+    }
+      else {
+        alert('O sorteio precisa ter pelo menos 2 participantes!');
+      }
+}
+
+function sgRaffleReady () {
+  if ($("#user-names > dt").size() > 1) {
   $('#start').addClass('close').removeClass('open');
     $('#sortegram').addClass('close').removeClass('open');
     $('#start-sortegram').removeClass('close').addClass('open');
-      document.getElementById('logo').innerHTML = "Sortegram";
+  document.getElementById('logo').innerHTML = "Sortegram";
+  $('#user-names-2').removeClass('lock-scroll').addClass('scroll');
     }
       else {
         alert('O sorteio precisa ter pelo menos 2 participantes!');
@@ -517,5 +587,11 @@ x.oninput = function () {
 y.oninput = function () {
     if (this.value.length > 7) {
         this.value = this.value.slice(0,7);
+        }
+}
+
+userName.oninput = function () {
+    if (this.value.length > 30) {
+        this.value = this.value.slice(0,30);
         }
 }
