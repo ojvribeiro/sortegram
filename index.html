@@ -2,37 +2,39 @@
 <html>
   <head>
 
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-  <meta name="application-name" content="Sortegram">
-  <meta name="author" content="Victor Ribeiro">
-  <meta name="email" content="victor_ribeiro135@hotmail.com">
-  <meta name="description" content="Sorteios">
-  <meta content="chrome=1" http-equiv="X-UA-Compatible">
-  <meta content="notranslate" name="google">
-  <meta name="format-detection" content="telephone=no">
-  <meta name="msapplication-tap-highlight" content="no">
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+	<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
+  <meta name='viewport' content='user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi' />
+  <meta name='application-name' content='Sortegram'>
+  <meta name='author' content='Victor Ribeiro'>
+  <meta name='email' content='victor_ribeiro135@hotmail.com'>
+  <meta name='description' content='Sorteios'>
+  <meta content='chrome=1' http-equiv='X-UA-Compatible'>
+  <meta content='notranslate' name='google'>
+  <meta name='format-detection' content='telephone=no'>
+  <meta name='msapplication-tap-highlight' content='no'>
 
 
-<link rel="icon" href="img/logo/color/SG-icon-16.png" />
-<link rel="icon" href="img/logo/color/SG-icon-24.png" />
-<link rel="icon" href="img/logo/color/SG-icon-32.png" />
-<link rel="icon" href="img/logo/color/SG-icon-64.png" />
-<link rel="icon" href="img/logo/color/SG-icon-72.png" />
-<link rel="icon" href="img/logo/color/SG-icon-96.png" />
-<link rel="icon" href="img/logo/color/SG-icon-114.png" />
-<link rel="icon" href="img/logo/color/SG-icon-128.png" />
-<link rel="icon" href="img/logo/color/SG-icon-144.png" />
+<link rel='icon' href='img/logo/color/SG-icon-16.png' />
+<link rel='icon' href='img/logo/color/SG-icon-24.png' />
+<link rel='icon' href='img/logo/color/SG-icon-32.png' />
+<link rel='icon' href='img/logo/color/SG-icon-64.png' />
+<link rel='icon' href='img/logo/color/SG-icon-72.png' />
+<link rel='icon' href='img/logo/color/SG-icon-96.png' />
+<link rel='icon' href='img/logo/color/SG-icon-114.png' />
+<link rel='icon' href='img/logo/color/SG-icon-128.png' />
+<link rel='icon' href='img/logo/color/SG-icon-144.png' />
 
-<meta name="msapplication-TileImage" content="img/logo/white/SG-icon-144.png"/>
-<meta name="msapplication-TileColor" content="#00A90E"/>
+<meta name='msapplication-TileImage' content='img/logo/white/SG-icon-144.png'/>
+<meta name='msapplication-TileColor' content='#00A90E'/>
 
-<link rel="stylesheet" href="css/sortegram.css" />
+<link rel='stylesheet' href='css/sweetalert.css' />
+<link rel='stylesheet' href='css/sortegram.css' />
 
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery-ui.min.js"></script>
+<script src='js/jquery.min.js'></script>
+<script src='js/jquery-ui.min.js'></script>
+<script src='js/sweetalert.min.js'></script>
 
 
 <title>
@@ -42,76 +44,97 @@ Sortegram
   </head>
 
 <body>
-<div id="navbar">
-<div id="navbar-ops-btn"></div>
-<div id="navbar-ops-btn-close"></div>
 
-<div id="logo">Sortegram</div>
-</div>
+<button id='navbar-ops-btn'></button>
+<div id='navbar-ops-btn-close'></div>
 
-<div id="sidebar-overlay"></div>
-<div id="sidebar" class="close">
-  <div class="sidebar-ops">
-    <div class="sidebar-op" onclick="novo()">Novo Sorteio</div>
-    <div class="sidebar-op">Último sorteio</div>
-    <div class="sidebar-op" onclick="window.localStorage.clear(); window.location.reload()">Limpar dados</div>
+<div id='logo'>Sortegram</div>
+
+
+<div id='sidebar-overlay'></div>
+<div id='sidebar' class='close'>
+  <div class='sidebar-ops'>
+    <div id='homeBtn' class='sidebar-op' onclick='home()'>Novo Sorteio</div>
+    <div id='sgManage' class='sidebar-op' onclick='SG()'>Gerenciar</div>
+    <div class='sidebar-op' onclick='window.localStorage.clear(); window.location.reload()'>Limpar dados</div>
+    <div class='ui-color-picker'>
+      <div style='margin-bottom: 10px'>Cor principal</div>
+      <div class='ui-color verde'></div>
+      <div class='ui-color azul'></div>
+      <div class='ui-color vermelho'></div>
+      <div class='ui-color amarelo'></div>
+      <div class='ui-color laranja'></div>
+      <div class='ui-color rosa'></div>
+      <div class='ui-color lilas'></div>
+      <div class='ui-color ciano'></div>
+      <div class='ui-color violeta'></div>
+    </div>
   </div>
 </div>
 
-
-<div id="start" class="open">
-<div id="classic-raffle"></div>
-<div id="sortegram-raffle"></div>
+<div id='home' class='open'>
+  <div id='sortegram-raffle' onclick="sgRaffle()"></div>
+  <div id='classic-raffle'></div>
 </div>
 
-<div id="cover"></div>
+<div id='start' class='close'>
+  <div class='holder'>
+    <button class='edit' onclick='editLast()'>Editar</button>
+    <button class='delete' onclick='deleteRaffle()'>Excluir</button>
+  </div>
+</div>
 
-<div id="classic" class="close">
+<div id='cover'></div>
 
-<div class="min-max">
-<div class="resizing-input">
-  Sortear <input id="n" class="input-min-max" type="number" placeholder="n" value="1" min="1" /> número<span id="numb-plural"></span> <br><br>
-  de <input id="x" class="input-min-max" type="number" placeholder="x" min="0" value="1" />
+<div id='classic' class='close'>
+
+<div class='min-max'>
+<div class='resizing-input'>
+  Sortear <input id='n' class='input-min-max' type='number' placeholder='n' value='1' min='1' /> número<span id='numb-plural'></span> <br><br>
+  de <input id='x' class='input-min-max' type='number' placeholder='x' min='0' value='1' />
   <span></span>
 </div>
-<div class="resizing-input">
-  a <input id="y" class="input-min-max" type="number" placeholder="y" min="0" value="100" />
+<div class='resizing-input'>
+  a <input id='y' class='input-min-max' type='number' placeholder='y' min='0' value='100' />
   <span></span>
 </div>
 </div><!-- .min-max -->
-<button onclick="SCgo()" id="generate" class="sort-btn">Sortear</button>
-<div id="current"></div>
-<button onclick="SCnew()" class="new-btn no-display">Novo Sorteio</button>
-<div id="result" class="no-display">Resultado</div>
+<button onclick='SCgo()' id='generate' class='sort-btn'>Sortear</button>
+<div id='current'></div>
+<button onclick='SCnew()' class='new-btn no-display'>Novo Sorteio</button>
+<div id='result' class='no-display'>Resultado</div>
 </div><!-- #classic -->
 
 
 
-<div id="sortegram" class="close">
-  <input id="username" class="input-username" type="text" placeholder="participante" autocomplete="off" />
-  <input onclick="sbmt()" id="username-btn" class="input-username-btn" type="button" value=" " />
+<div id='sortegram' class='close'>
+  <input type="checkbox" id="is-new" class="no-display" />
+  <input id='username' class='input-username' type='text' placeholder='participante' autocomplete='off' />
+  <input onclick='sbmt()' id='username-btn' class='input-username-btn' type='button' value=' ' />
   <br>
-  <label for="username" id="input-username-lbl">Digite o nome do participante</label>
+  <label for='username' id='input-username-lbl'>Digite o nome do participante</label>
   <br><br>
-  <span id="number-of-participants"></span> participante<span id="part-plural"></span>
-  <dl id="user-names"></dl>
-  <button id="delete-all" onclick="sgRemoveAll()">Remover todos</button>
-  <button id="sg-save" onclick="">Salvar</button>
-  <button id="sg-done" onclick="">Preparar Sorteio</button>
+  <span id='number-of-participants'></span> participante<span id='part-plural'></span>
+  <br><br>
+  <button id='delete-all' onclick='deleteRaffle()'>Excluir</button>
+  <button id='sg-save' disabled>Salvar</button>
+  <dl id='user-names'></dl>
+  <button id='sg-done'></button>
 </div><!-- #sortegram -->
 
-<div id="start-sortegram" class="close">
-  <button onclick="SSgo()" id="ss-generate" class="sort-btn">Sortear</button>
-  <div id="SSresult" class="no-display">Resultado</div>
-  <dl id="user-names-2"></dl>
-  <div id="SScurrent"></div>
-  <div id="NoPdiv">
-  <span id="number-of-participants-2"></span> participante<span id="part-plural-2"></span>
+<div id='start-sortegram' class='close'>
+  <button onclick='SSgo()' id='ss-generate' class='sort-btn'>Sortear</button>
+  <div id='SSresult' class='no-display'>Resultado</div>
+  <dl id='user-names-2'></dl>
+  <div id='SScurrent'></div>
+  <div id='NoPdiv'>
+  <span id='number-of-participants-2'></span> participante<span id='part-plural-2'></span>
   </div>
-  <button onclick="SSnew()" class="new-btn no-display">Novo Sorteio</button>
+  <button onclick='SSnew()' class='new-btn no-display'>Novo sorteio Sortegram</button>
+  <button onclick='home()' class='back-to-home-btn no-display'>Voltar para o início</button>
 </div><!-- #sortegram -->
 
 
-<script src="js/sortegram.js"></script>
+<script src='js/sortegram.js'></script>
 </body>
 </html>
