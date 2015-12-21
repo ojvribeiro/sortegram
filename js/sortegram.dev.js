@@ -10,8 +10,8 @@
 // Define all vars
 var d = document,
     w = window,
-    generate = d.getElementById( 'generate' ),
-    SSgenerate = d.getElementById( 'ss-generate' ),
+    cGo = document.getElementById( 'c-go' ),
+    sgGo = document.getElementById( 'sg-go' ),
     minMax = $( '.min-max' ),
 
     // Style vars
@@ -30,33 +30,34 @@ var d = document,
     violet = ['#96197C','#D84EFD','#F8CDFF'],
 
     // Number input vars
-    n = d.getElementById( 'n' ),
-    x = d.getElementById( 'x' ),
-    y = d.getElementById( 'y' ),
+    n = document.getElementById( 'n' ),
+    x = document.getElementById( 'x' ),
+    y = document.getElementById( 'y' ),
 
     // DOM vars
     $bg_uiColor = $( '#cover, #sidebar' ),
-    $btn_uiColor = $( '.new-btn, .sort-btn, #result, #sg-done' ),
+    $btn_uiColor = $( '.new-btn, .sort-btn, #c-result, #sg-done' ),
     $fnt_uiColor = $( '#input-username-lbl' ),
 
-    result = d.getElementById( 'result' ),
-    SSresult = d.getElementById( 'SSresult' ),
-    userName = d.getElementById( 'username' ),
-    inputUserNameLabel = d.getElementById( 'input-username-lbl' ),
-    sgNoPEdit = d.getElementById( 'number-of-participants' ),
-    sgNoP = d.getElementById( 'number-of-participants-2' ),
-    newOp = d.getElementById( 'newOp' ),
-    sgManage = d.getElementById( 'sgManage' ),
-    NoPdiv = d.getElementById( 'NoPdiv' ),
-    savedNames = d.getElementById( 'user-names-2' ),
-    savedNamesEdit = d.getElementById( 'user-names' ),
-    savedNamesMng = d.getElementById( 'user-names-manage' ),
-    saveBtn = d.getElementById( 'sg-save' ),
+    cResult = document.getElementById( 'c-result' ),
+    sgResult = document.getElementById( 'sg-result' ),
+    userName = document.getElementById( 'username' ),
+    inputUserNameLabel = document.getElementById( 'input-username-lbl' ),
+    sgNoPEdit = document.getElementById( 'number-of-participants' ),
+    sgNoP = document.getElementById( 'number-of-participants-2' ),
+    sgManage = document.getElementById( 'sg-manage-btn' ),
+    NoPdiv = document.getElementById( 'NoPdiv' ),
+    savedNames = document.getElementById( 'user-names-2' ),
+    savedNamesEdit = document.getElementById( 'user-names' ),
+    savedNamesMng = document.getElementById( 'user-names-manage' ),
+    saveBtn = document.getElementById( 'sg-save' ),
     $deleteUser = $( '.delete-user' ),
-    deleteBtn = d.getElementById( 'delete-all' ),
-    isNew = d.getElementById( 'is-new' ),
-    nbOpsBtn = d.getElementById( 'navbar-ops-btn' ),
-    nbOpsBtnClose = d.getElementById( 'navbar-ops-btn-close' ),
+    deleteBtn = document.getElementById( 'delete-all' ),
+    isNew = document.getElementById( 'is-new' ),
+    nbOpsBtn = document.getElementById( 'navbar-ops-btn' ),
+    nbOpsBtnClose = document.getElementById( 'navbar-ops-btn-close' ),
+    cCurrent = document.getElementById( 'c-current' ),
+    sgCurrent = document.getElementById( 'sg-current' ),
 
     // LocalStorage vars (all of them starts with underscore)
     _uiColor = localStorage.getItem( 'ui-color' ),
@@ -81,7 +82,7 @@ if ( !localStorage['is-new'] ) {
   localStorage.setItem( 'is-new','true' );
   localStorage.setItem( 'saved-names-edit','' );
   sgManage.style.display = hide;
-  d.location.reload();
+  document.location.reload();
 }
 if ( _isNew === 'true' ) {
   sgManage.style.display = hide;
@@ -160,16 +161,16 @@ $( sgNoPEdit ).html( $( '#user-names > dt' ).size() );
 
 
 if ( $( '#user-names > dt' ).size() === 0 ) {
-  d.getElementById( 'part-plural' ).innerHTML = 's';
-  d.getElementById( 'part-plural-2' ).innerHTML = 's';
+  document.getElementById( 'part-plural' ).innerHTML = 's';
+  document.getElementById( 'part-plural-2' ).innerHTML = 's';
 }
  else if ( $( '#user-names > dt' ).size() === 1 ) {
-   d.getElementById( 'part-plural' ).innerHTML = '';
-   d.getElementById( 'part-plural-2' ).innerHTML = '';
+   document.getElementById( 'part-plural' ).innerHTML = '';
+   document.getElementById( 'part-plural-2' ).innerHTML = '';
  }
   else {
-   d.getElementById( 'part-plural' ).innerHTML = 's';
-   d.getElementById( 'part-plural-2' ).innerHTML = 's';
+   document.getElementById( 'part-plural' ).innerHTML = 's';
+   document.getElementById( 'part-plural-2' ).innerHTML = 's';
  }
 
 
@@ -187,37 +188,37 @@ function downList() {
 
 // Inicio
 function home() {
-  result.style.color = '#FFF';
-  result.style.backgroundColor = 'rgba(236, 248, 255, 0.5)';
-  result.style.borderTop = '3px solid #FFF';
-  result.style.borderBottom = '3px solid #FFF';
+  cResult.style.color = '#FFF';
+  cResult.style.backgroundColor = 'rgba(236, 248, 255, 0.5)';
+  cResult.style.borderTop = '3px solid #FFF';
+  cResult.style.borderBottom = '3px solid #FFF';
   $( '#home' ).removeClass( 'close' ).addClass( 'open' );
-  $( '#manage' ).removeClass( 'open' ).addClass( 'close' );
+  $( '#sg-manage' ).removeClass( 'open' ).addClass( 'close' );
     $( '#classic' ).removeClass( 'open' ).addClass( 'close' );
       $( '#sortegram' ).removeClass( 'open' ).addClass( 'close' );
         $( '#start-sortegram' ).removeClass( 'open' ).addClass( 'close' );
-  d.getElementById( 'logo' ).innerHTML = 'Sortegram';
-  SSquit();
-  SCnew();
+  document.getElementById( 'logo' ).innerHTML = 'Sortegram';
+  sgQuit();
+  cNew();
 }
 
 
 
 
 // Gerenciar SS
-function SG () {
-  result.style.color = '#FFF';
-  result.style.backgroundColor = 'rgba(236, 248, 255, 0.5)';
-  result.style.borderTop = '3px solid #FFF';
-  result.style.borderBottom = '3px solid #FFF';
-  $( '#manage' ).removeClass( 'close' ).addClass( 'open' );
+function sgManage () {
+  cResult.style.color = '#FFF';
+  cResult.style.backgroundColor = 'rgba(236, 248, 255, 0.5)';
+  cResult.style.borderTop = '3px solid #FFF';
+  cResult.style.borderBottom = '3px solid #FFF';
+  $( '#sg-manage' ).removeClass( 'close' ).addClass( 'open' );
     $( '#home' ).removeClass( 'open' ).addClass( 'close' );
     $( '#classic' ).removeClass( 'open' ).addClass( 'close' );
       $( '#sortegram' ).removeClass( 'open' ).addClass( 'close' );
         $( '#start-sortegram' ).removeClass( 'open' ).addClass( 'close' );
-  d.getElementById( 'logo' ).innerHTML = 'Gerenciar';
-  SSquit();
-  SCnew();
+  document.getElementById( 'logo' ).innerHTML = 'Gerenciar';
+  sgQuit();
+  cNew();
 }
 
 
@@ -226,7 +227,7 @@ function SG () {
 // Ultimo sorteio
 function Last () {
 
-      $( '#manage' ).removeClass( 'close' ).addClass( 'open' );
+      $( '#sg-manage' ).removeClass( 'close' ).addClass( 'open' );
       $( '#sortegram' ).removeClass( 'open' ).addClass( 'close' );
       $( '#start-sortegram' ).removeClass( 'open' ).addClass( 'close' );
       $( '#home' ).removeClass( 'open' ).addClass( 'close' );
@@ -239,12 +240,12 @@ function editLast () {
       $( '.new-btn, .back-to-home-btn' ).hide(); // Esconde o botao 'Novo Sorteio'
 
       $( '#sortegram' ).removeClass( 'close' ).addClass( 'open' );
-      $( '#manage' ).removeClass( 'open' ).addClass( 'close' );
+      $( '#sg-manage' ).removeClass( 'open' ).addClass( 'close' );
       $( '#start-sortegram' ).removeClass( 'open' ).addClass( 'close' );
       $( '#home' ).removeClass( 'open' ).addClass( 'close' );
 
-        d.getElementById( 'logo' ).innerHTML = 'Editar';
-        d.getElementById( 'user-names' ).innerHTML = _savedNamesEdit;
+        document.getElementById( 'logo' ).innerHTML = 'Editar';
+        document.getElementById( 'user-names' ).innerHTML = _savedNamesEdit;
         changeNumber();
 
       saveBtn.disabled = true;
@@ -258,26 +259,26 @@ function editLast () {
 
 
 // Reinicia o Sorteio Clássico
-function SCnew () {
-  generate.style.display = show;
-  result.style.display = hide;
+function cNew () {
+  cGo.style.display = show;
+  cResult.style.display = hide;
   $( '.new-btn, .back-to-home-btn' ).hide();
-  current.innerHTML = '';
+  cCurrent.innerHTML = '';
   n.removeAttribute( 'disabled' );
   x.removeAttribute( 'disabled' );
   y.removeAttribute( 'disabled' );
-  generate.removeAttribute( 'disabled' );
+  cGo.removeAttribute( 'disabled' );
 }
 
 
 
 // Reinicia o Sorteio Sortegram
-function SSnew () {
-  SSgenerate.style.display = show;
-  SSresult.style.display = hide;
+function sgNew () {
+  sgGo.style.display = show;
+  sgResult.style.display = hide;
   $( '.new-btn, .back-to-home-btn' ).hide();
-  SScurrent.innerHTML = '';
-  SSgenerate.removeAttribute( 'disabled' );
+  sgCurrent.innerHTML = '';
+  sgGo.removeAttribute( 'disabled' );
 
       // Esconde o trofeu
     $( '#trophy' ).hide();
@@ -289,18 +290,17 @@ function SSnew () {
         $( '.new-btn, .back-to-home-btn' ).hide(); // Esconde o botao 'Novo Sorteio'
 
         $( '#sortegram' ).removeClass( 'close' ).addClass( 'open' );
-        $( '#manage' ).removeClass( 'open' ).addClass( 'close' );
+        $( '#sg-manage' ).removeClass( 'open' ).addClass( 'close' );
         $( '#start-sortegram' ).removeClass( 'open' ).addClass( 'close' );
         $( '#home' ).removeClass( 'open' ).addClass( 'close' );
 
-        d.getElementById( 'logo' ).innerHTML = 'Adicionar';
+        document.getElementById( 'logo' ).innerHTML = 'Adicionar';
 
-      savedNamesEdit = d.getElementById( 'user-names' ).innerHTML = '';
-      d.getElementById( 'user-names-2' ).innerHTML = '';
+      savedNamesEdit = document.getElementById( 'user-names' ).innerHTML = '';
+      document.getElementById( 'user-names-2' ).innerHTML = '';
 
 
       changeNumber();
-      sgManage.style.display = hide;
 
       saveBtn.disabled = true;
       saveBtn.innerHTML = 'Salvar';
@@ -310,18 +310,18 @@ function SSnew () {
 
 
 
-function SSquit () {
-  SSgenerate.style.display = show;
-  SSresult.style.display = hide;
+function sgQuit () {
+  sgGo.style.display = show;
+  sgResult.style.display = hide;
   $( '.new-btn, .back-to-home-btn' ).hide();
-  SScurrent.innerHTML = '';
-  SSgenerate.removeAttribute( 'disabled' );
+  sgCurrent.innerHTML = '';
+  sgGo.removeAttribute( 'disabled' );
 }
 
 
 
 // Começa o Sorteio Clássico
-function SCgo () {
+function cStart () {
 // Cria uma array com a quantidade de numeros dada de modo que não se repitam
 var arr = []
 while ( arr.length < n.value ) {
@@ -343,30 +343,30 @@ while ( arr.length < n.value ) {
     && y.value.match(/^(\d){0,7}$/g) // E se eles possuirem ate 7 digitos
     && n.value <= y.value // E o valor de n for menor que y
       ) {
-    result.style.color = '#888888';
-    result.style.backgroundColor = '#FFF';
-    result.style.fontSize = '38pt';
-    result.style.borderRadius = '0px';
-    d.getElementById( 'logo' ).innerHTML = 'Sorteando';
+    cResult.style.color = '#888888';
+    cResult.style.backgroundColor = '#FFF';
+    cResult.style.fontSize = '38pt';
+    cResult.style.borderRadius = '0px';
+    document.getElementById( 'logo' ).innerHTML = 'Sorteando';
 
     $( '#logo' ).removeClass( 'logo-blink addfadeIn' ).addClass( 'logo-blink' );
-    $( result ).removeClass( 'result-rotate' ).addClass( 'result-rotate' );
-    $( result ).removeClass( 'addfadeIn' );
+    $( cResult ).removeClass( 'result-rotate' ).addClass( 'result-rotate' );
+    $( cResult ).removeClass( 'addfadeIn' );
 
     var sort = setInterval(function() {
       n.setAttribute( 'disabled','true' );
       x.setAttribute( 'disabled','true' );
       y.setAttribute( 'disabled','true' );
-      generate.setAttribute( 'disabled','true' );
-      generate.style.display = hide;
-      result.style.display = show;
-      result.innerHTML = Math.floor(Math.random() * ((Number(y.value) - Number(x.value)) + 1) + Number(x.value));
+      cGo.setAttribute( 'disabled','true' );
+      cGo.style.display = hide;
+      cResult.style.display = show;
+      cResult.innerHTML = Math.floor(Math.random() * ((Number(y.value) - Number(x.value)) + 1) + Number(x.value));
 
-  if ( result.innerHTML.length <= 5 ) {
-      result.style.fontSize = '38pt';
+  if ( cResult.innerHTML.length <= 5 ) {
+      cResult.style.fontSize = '38pt';
   }
-   else if ( result.innerHTML.length >= 6 ) {
-      result.style.fontSize = '20pt';
+   else if ( cResult.innerHTML.length >= 6 ) {
+      cResult.style.fontSize = '20pt';
   }
 }, 60);
 
@@ -377,23 +377,23 @@ setTimeout(function() { // Timeout de 4s
 if ( n.value !== '' ) { // Se o campo n NAO estiver vazio...
       clearInterval(sort); // Remove o loop de numeros
       $( '.new-btn, .back-to-home-btn' ).fadeIn(); // Mostra o botao 'Novo Sorteio'
-              result.innerHTML = arr; // Exibe os resultados
+              cResult.innerHTML = arr; // Exibe os resultados
 
-              result.style.color = '#FFF';
-              result.style.backgroundColor = 'rgba(242, 255, 0, 0.5)';
-              result.style.borderTop = '3px solid #FFF';
-              result.style.borderBottom = '3px solid #FFF';
-              result.style.marginLeft = '-3px';
+              cResult.style.color = '#FFF';
+              cResult.style.backgroundColor = 'rgba(242, 255, 0, 0.5)';
+              cResult.style.borderTop = '3px solid #FFF';
+              cResult.style.borderBottom = '3px solid #FFF';
+              cResult.style.marginLeft = '-3px';
 
-              d.getElementById( 'logo' ).innerHTML = 'Resultado';
+              document.getElementById( 'logo' ).innerHTML = 'Resultado';
 
       // Acrescenta um tracinho apos cada numero do resultado
-      result.innerHTML = result.innerHTML.replace(/,/g,' - ');
+      cResult.innerHTML = cResult.innerHTML.replace(/,/g,' - ');
 
       // Retorna a data e hora atuais
       var now = new Date().toLocaleString(),
       plural,
-      current = d.getElementById( 'current' );
+      cCurrent = document.getElementById( 'c-current' );
       // Plural ou singular?
       if ( Number(n.value) > 1 ) {
         plural = 's';
@@ -406,7 +406,7 @@ if ( n.value !== '' ) { // Se o campo n NAO estiver vazio...
       }
 
       // Imprime a data e hora do sorteio
-      current.innerHTML =
+      cCurrent.innerHTML =
       'Número'
       +plural
       +' gerado'
@@ -416,15 +416,15 @@ if ( n.value !== '' ) { // Se o campo n NAO estiver vazio...
       +'.<br><br>';
 
       // Remove o efeito de fadeIn e rotacao
-      $( '#result' ).removeClass( 'addfadeIn result-rotate' ).addClass( 'addfadeIn' );
+      $( '#c-result' ).removeClass( 'addfadeIn result-rotate' ).addClass( 'addfadeIn' );
       $( '#logo' ).removeClass( 'addfadeIn logo-blink' ).addClass( 'addfadeIn' );
 
       // Aumenta ou diminui a fonte de acordo com o resultado
-      if ( result.innerHTML.length <= 12 ) {
-          result.style.fontSize = '38pt';
+      if ( cResult.innerHTML.length <= 12 ) {
+          cResult.style.fontSize = '38pt';
       }
-       else if ( result.innerHTML.length >= 13 ) {
-          result.style.fontSize = '20pt';
+       else if ( cResult.innerHTML.length >= 13 ) {
+          cResult.style.fontSize = '20pt';
       }
     };
 
@@ -438,17 +438,17 @@ if ( n.value !== '' ) { // Se o campo n NAO estiver vazio...
         // Abre o menu lateral
         nbOpsBtn.addEventListener( 'click', function() {
         $( '#sidebar' ).removeClass( 'close' ).addClass( 'open' );
-        d.getElementById( 'sidebar-overlay' ).style.display = show;
+        document.getElementById( 'sidebar-overlay' ).style.display = show;
         nbOpsBtn.style.display = hide;
         nbOpsBtnClose.style.display = show;
         });
 
         // Fecha o menu lateral
-        d.addEventListener( 'click', function ( event ) {
+        document.addEventListener( 'click', function ( event ) {
           if ( !$( event.target ).closest( '#sidebar, #navbar-ops-btn' ).length
             || $( event.target ).closest( '.sidebar-op' ).length ) {
               $( '#sidebar' ).removeClass( 'open' ).addClass( 'close' );
-              d.getElementById( 'sidebar-overlay' ).style.display = hide;
+              document.getElementById( 'sidebar-overlay' ).style.display = hide;
               nbOpsBtnClose.style.display = hide;
               nbOpsBtn.style.display = show;
             }
@@ -465,16 +465,16 @@ function changeNumber () {
   sgNoP.innerHTML = $( '#user-names > dt' ).size();
 
 if ( $( '#user-names > dt' ).size() === 0 ) {
-  d.getElementById( 'part-plural' ).innerHTML = 's';
-  d.getElementById( 'part-plural-2' ).innerHTML = 's';
+  document.getElementById( 'part-plural' ).innerHTML = 's';
+  document.getElementById( 'part-plural-2' ).innerHTML = 's';
 }
  else if ( $( '#user-names > dt' ).size() === 1 ) {
-   d.getElementById( 'part-plural' ).innerHTML = '';
-   d.getElementById( 'part-plural-2' ).innerHTML = '';
+   document.getElementById( 'part-plural' ).innerHTML = '';
+   document.getElementById( 'part-plural-2' ).innerHTML = '';
  }
   else {
-   d.getElementById( 'part-plural' ).innerHTML = 's';
-   d.getElementById( 'part-plural-2' ).innerHTML = 's';
+   document.getElementById( 'part-plural' ).innerHTML = 's';
+   document.getElementById( 'part-plural-2' ).innerHTML = 's';
  }
 }
 
@@ -495,12 +495,12 @@ function sbmt () { // Funcao que adiciona a lista o participante
 
         userName.blur(); userName.select();
 
-          savedNamesEdit = d.getElementById( 'user-names' ).innerHTML +=
+          savedNamesEdit = document.getElementById( 'user-names' ).innerHTML +=
           '<dt><div class=\'dt-text\'>'
           + userName.value
           + '</div><button class=\'delete-user\'></button></dt>';
 
-          savedNames = d.getElementById( 'user-names-2' ).innerHTML = savedNamesEdit;
+          savedNames = document.getElementById( 'user-names-2' ).innerHTML = savedNamesEdit;
 
               changeNumber();
 }
@@ -520,6 +520,7 @@ function sbmt () { // Funcao que adiciona a lista o participante
 
 $( d ).on('click','.delete-user',function () {
       $( this ).parent().remove();
+      $( '#user-names-2' ).html($( '#user-names' ).html());
 
         changeNumber();
 
@@ -527,43 +528,43 @@ $( d ).on('click','.delete-user',function () {
         saveBtn.innerHTML = 'Salvar';
         saveBtn.style.backgroundImage = 'url(img/appbar.save.png)';
 
-        savedNames = d.getElementById( 'user-names-2' ).innerHTML = savedNamesEdit;
+        Reload();
 });
 
 
 
 // Começa o Sorteio Sortegram
-function SSgo () {
+function sgStart () {
 // Cria uma array com a quantidade de numeros dada de modo que não se repitam
 var sortear = Math.floor(Math.random() * ((Number(sgNoP.innerHTML) - 1) + 1) + 1),
     winner = sortear - 1;
 
     isNew.checked = true;
 
-    SSresult.style.color = '#FFF';
-    SSresult.style.fontSize = '38pt';
-    d.getElementById( 'logo' ).innerHTML = 'Sorteando';
+    sgResult.style.color = '#FFF';
+    sgResult.style.fontSize = '38pt';
+    document.getElementById( 'logo' ).innerHTML = 'Sorteando';
 
     $( '#logo' ).removeClass( 'logo-blink addfadeIn' ).addClass( 'logo-blink' );
-    $( SSresult ).removeClass( 'addfadeIn' );
+    $( sgResult ).removeClass( 'addfadeIn' );
 
     nbOpsBtn.disabled = true;
 
 var sort = setInterval(function() {
-      SSgenerate.disabled = true;
-      SSgenerate.style.display = hide;
-      SSresult.style.display = show;
-      SSresult.innerHTML = Math.floor(Math.random() * ((Number(sgNoP.innerHTML) - 1) + 1) + 1);
+      sgGo.disabled = true;
+      sgGo.style.display = hide;
+      sgResult.style.display = show;
+      sgResult.innerHTML = Math.floor(Math.random() * ((Number(sgNoP.innerHTML) - 1) + 1) + 1);
 
 
-      if ( SSresult.innerHTML.length <= 10 ) {
-          SSresult.style.fontSize = '30pt';
+      if ( sgResult.innerHTML.length <= 10 ) {
+          sgResult.style.fontSize = '30pt';
       }
-      else if ( SSresult.innerHTML.length <= 19 ) {
-          SSresult.style.fontSize = '20pt';
+      else if ( sgResult.innerHTML.length <= 19 ) {
+          sgResult.style.fontSize = '20pt';
       }
-      else if ( SSresult.innerHTML.length >= 20 ) {
-          SSresult.style.fontSize = '12pt';
+      else if ( sgResult.innerHTML.length >= 20 ) {
+          sgResult.style.fontSize = '12pt';
       }
 }, 60);
 
@@ -572,7 +573,7 @@ var sort = setInterval(function() {
       // Bloqueia o scroll enquanto o sorteio é feito
       $( '#user-names-2' ).removeClass( 'scroll' ).addClass( 'lock-scroll' );
 
-      $( '#SSresult' ).before( '<div id=\'spinner\'><\/div>' );
+      $( '#sg-result' ).before( '<div id=\'spinner\'><\/div>' );
       $( '#spinner' ).fadeIn();
 
 
@@ -586,17 +587,17 @@ $( '#user-names-2' ).animate({
 
       clearInterval(sort); // Remove o loop de numeros
 
-              SSresult.innerHTML = sortear; // Exibe os resultados
+              sgResult.innerHTML = sortear; // Exibe os resultados
 
-              SSresult.style.color = '#FFF';
-              SSresult.style.backgroundColor = 'transparent';
+              sgResult.style.color = '#FFF';
+              sgResult.style.backgroundColor = 'transparent';
 
-              d.getElementById( 'logo' ).innerHTML = 'Resultado';
+              document.getElementById( 'logo' ).innerHTML = 'Resultado';
 
       // Retorna a data e hora atuais
       var now = new Date().toLocaleString(),
       plural,
-      SScurrent = d.getElementById( 'SScurrent' );
+      sgCurrent = document.getElementById( 'sg-current' );
       // Plural ou singular?
       if ( Number(n.value) > 1 ) {
         plural = 's';
@@ -611,14 +612,14 @@ $( '#user-names-2' ).animate({
 
 
           // Mostra o trofeu
-          $( '#SSresult' ).before( '<div id=\'trophy\'><\/div>' );
+          $( '#sg-result' ).before( '<div id=\'trophy\'><\/div>' );
           $( '#trophy' ).show( 'bounce' );
           $( '#spinner' ).fadeOut();
 
           nbOpsBtn.disabled = false;
 
       // Imprime a data e hora do sorteio
-      SScurrent.innerHTML =
+      sgCurrent.innerHTML =
       'Sorteio feito em '
       + now
       +'.<br><br>';
@@ -650,20 +651,20 @@ $( '#user-names-2' ).animate({
         // Permite o scroll quando o sorteio termina
         $( '#user-names-2' ).removeClass( 'lock-scroll' ).addClass( 'scroll' );
 
-          SSresult.innerHTML = $( '#user-names-2 dt:nth-child('+sortear+')' ).children().html();
-          SSresult.style.backgroundColor = 'rgba(0, 0, 0, 0.3)';
+          sgResult.innerHTML = $( '#user-names-2 dt:nth-child('+sortear+')' ).children().html();
+          sgResult.style.backgroundColor = 'rgba(0, 0, 0, 0.3)';
 
           $( '.new-btn, .back-to-home-btn' ).show(); // Mostra o botao 'Novo Sorteio'
 
       // Aumenta ou diminui a fonte de acordo com o resultado
-      if ( SSresult.innerHTML.length <= 10 ) {
-          SSresult.style.fontSize = '30pt';
+      if ( sgResult.innerHTML.length <= 10 ) {
+          sgResult.style.fontSize = '30pt';
       }
-       else if ( SSresult.innerHTML.length <= 19 ) {
-          SSresult.style.fontSize = '20pt';
+       else if ( sgResult.innerHTML.length <= 19 ) {
+          sgResult.style.fontSize = '20pt';
       }
-        else if ( SSresult.innerHTML.length >= 20 ) {
-      SSresult.style.fontSize = '12pt';
+        else if ( sgResult.innerHTML.length >= 20 ) {
+      sgResult.style.fontSize = '12pt';
       }
     }, 2000);
 
@@ -679,12 +680,12 @@ $( d ).contextmenu(function() {
 
 
 // Funcao para selecionar o SC
-function classicRaffle () {
+function cRaffle () {
   $( '.new-btn, .back-to-home-btn' ).hide(); // Esconde o botao 'Novo Sorteio'
-  $( '#manage' ).addClass( 'close' ).removeClass( 'open' );
+  $( '#sg-manage' ).addClass( 'close' ).removeClass( 'open' );
   $( '#home' ).removeClass( 'open' ).addClass( 'close' );
     $( '#classic' ).removeClass( 'close' ).addClass( 'open' );
-      d.getElementById( 'logo' ).innerHTML = 'Clássico';
+      document.getElementById( 'logo' ).innerHTML = 'Clássico';
 }
 
 
@@ -692,7 +693,7 @@ function classicRaffle () {
 function sgRaffle () {
 
   if ( isNew.checked === true ) { // Se NAO EXISTE jogo salvo
-    SSnew();
+    sgNew();
   }
   else if ( isNew.checked === false ) { // Se EXISTE jogo salvo
     Last();
@@ -712,8 +713,8 @@ function deleteRaffle () {
       allowOutsideClick: true,
       closeOnConfirm: false
     }, function() {
-          savedNames = d.getElementById( 'user-names' ).innerHTML = '';
-          d.getElementById( 'user-names-2' ).innerHTML = '';
+          savedNames = document.getElementById( 'user-names' ).innerHTML = '';
+          document.getElementById( 'user-names-2' ).innerHTML = '';
           sgSaveList();
           changeNumber();
 
@@ -740,8 +741,8 @@ function deleteRaffle () {
 
 // Remover todos sem confirmacao (atalho)
 function removeAllNoConfirm () {
-  savedNamesEdit = d.getElementById( 'user-names' ).innerHTML = '';
-  d.getElementById( 'user-names-2' ).innerHTML = '';
+  savedNamesEdit = document.getElementById( 'user-names' ).innerHTML = '';
+  document.getElementById( 'user-names-2' ).innerHTML = '';
   localStorage.setItem( 'saved-names-edit','' );
       sgSaveList();
       changeNumber();
@@ -774,23 +775,20 @@ function sgSaveRaffle () {
 }
 
 function sgRaffleReady () {
-SSresult.style.backgroundColor = 'transparent';
+sgResult.style.backgroundColor = 'transparent';
   if ( isNew.checked
     && $( '#user-names > dt' ).size() > 1
     ) {
-        savedNames = d.getElementById( 'user-names-2' ).innerHTML = savedNamesEdit;
+        $( '#user-names-2' ).html($( '#user-names' ).html());
 
         $( '#start-sortegram' ).removeClass( 'close' ).addClass( 'open' );
-        $( '#manage' ).removeClass( 'open' ).addClass( 'close' );
+        $( '#sg-manage' ).removeClass( 'open' ).addClass( 'close' );
         $( '#home' ).removeClass( 'open' ).addClass( 'close' );
         $( '#sortegram' ).removeClass( 'open' ).addClass( 'close' );
 
         $( '#user-names-2' ).removeClass( 'lock-scroll' ).addClass( 'scroll' );
 
-        d.getElementById( 'logo' ).innerHTML = 'Sortegram';
-
-
-        sgManage.style.display = hide;
+        document.getElementById( 'logo' ).innerHTML = 'Sortegram';
 
         $('#user-names-2 .delete-user').hide();
     }
@@ -799,17 +797,15 @@ SSresult.style.backgroundColor = 'transparent';
           && $( '#user-names > dt' ).size() > 1
           ) {
 
-          savedNames = d.getElementById( 'user-names-2' ).innerHTML = _savedNamesEdit;
+          $( '#user-names-2' ).html($( '#user-names' ).html());
 
           $( '#start-sortegram' ).removeClass( 'close' ).addClass( 'open' );
-          $( '#manage' ).removeClass( 'open' ).addClass( 'close' );
+          $( '#sg-manage' ).removeClass( 'open' ).addClass( 'close' );
           $( '#sortegram' ).removeClass( 'open' ).addClass( 'close' );
 
           $( '#user-names-2' ).removeClass( 'lock-scroll' ).addClass( 'scroll' );
 
-          d.getElementById( 'logo' ).innerHTML = 'Sortegram';
-
-          sgManage.style.display = hide;
+          document.getElementById( 'logo' ).innerHTML = 'Sortegram';
 
           $('#user-names-2 .delete-user').hide();
     }
@@ -897,7 +893,7 @@ $( '.ui-color-picker .ui-color' ).on( 'click', function () {
 
 
 x.oninput = function () {
-    d.getElementById( 'x' ).setAttribute( 'max', y.value - 2 );
+    document.getElementById( 'x' ).setAttribute( 'max', y.value - 2 );
 }
 
 n.onchange = function () {
@@ -910,11 +906,11 @@ n.onchange = function () {
     }
     if ( Number(n.value) === 0 ) {
       n.value = 1;
-      d.getElementById( 'numb-plural' ).innerHTML = '';
+      document.getElementById( 'numb-plural' ).innerHTML = '';
     }
     if ( Number(n.value) > 100 ) {
       n.value = 100;
-      d.getElementById( 'numb-plural' ).innerHTML = 's';
+      document.getElementById( 'numb-plural' ).innerHTML = 's';
     }
 }
 
@@ -933,16 +929,16 @@ n.oninput = function () {
         this.value = this.value.slice( 0,3 );
     }
 
-d.getElementById( 'n' ).setAttribute( 'max', y.value - x.value - 1 );
+document.getElementById( 'n' ).setAttribute( 'max', y.value - x.value - 1 );
 
 if ( Number(n.value) > 1 ) {
-  d.getElementById( 'numb-plural' ).innerHTML = 's';
+  document.getElementById( 'numb-plural' ).innerHTML = 's';
 }
 else if ( Number(n.value) === 1 ) {
-  d.getElementById( 'numb-plural' ).innerHTML = '';
+  document.getElementById( 'numb-plural' ).innerHTML = '';
 }
 else if ( Number(n.value) === 0 ) {
-  d.getElementById( 'numb-plural' ).innerHTML = 's';
+  document.getElementById( 'numb-plural' ).innerHTML = 's';
 }
 }
 
@@ -969,8 +965,8 @@ userName.oninput = function () {
 function Reload () {
   $( '#script' ).remove();
 
-  var _s = d.createElement( 'script' );
+  var _s = document.createElement( 'script' );
   _s.id = 'script';
   _s.src = 'js/sortegram.dev.js';
-  d.body.appendChild( _s );
+  document.body.appendChild( _s );
 };

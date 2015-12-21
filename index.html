@@ -62,7 +62,7 @@ Sortegram
 <div id='sidebar' class='close'>
   <div class='sidebar-ops'>
     <div id='homeBtn' class='sidebar-op' onclick='home()'>Novo Sorteio</div>
-    <div id='sgManage' class='sidebar-op' onclick='SG()'>Gerenciar</div>
+    <div id='sg-manage-btn' class='sidebar-op' onclick='SG()'>Gerenciar</div>
     <div class='sidebar-op' onclick='window.localStorage.clear(); window.location.reload()'>Limpar dados</div>
     <div class='ui-color-picker'>
       <div style='margin-bottom: 10px'>Cor principal</div>
@@ -80,11 +80,11 @@ Sortegram
 </div>
 
 <div id='home' class='open lock-scroll'>
-  <div id='sortegram-raffle' onclick='sgRaffle()'></div>
-  <div id='classic-raffle' onclick='classicRaffle()'></div>
+  <div id='sg-raffle' onclick='sgRaffle()'></div>
+  <div id='c-raffle' onclick='cRaffle()'></div>
 </div>
 
-<div id='manage' class='close lock-scroll'>
+<div id='sg-manage' class='close lock-scroll'>
   <div class='holder'>
     <dl id='user-names-manage'></dl>
     <button class='edit' onclick='editLast()'>Editar</button>
@@ -107,10 +107,10 @@ Sortegram
   <span></span>
 </div>
 </div><!-- .min-max -->
-<button onclick='SCgo()' id='generate' class='sort-btn'>Sortear</button>
-<div id='current'></div>
-<button onclick='SCnew()' class='new-btn no-display'>Novo Sorteio</button>
-<div id='result' class='no-display'>Resultado</div>
+<button onclick='cStart()' id='c-go' class='sort-btn'>Sortear</button>
+<div id='c-current'></div>
+<button onclick='cNew()' class='new-btn no-display'>Novo Sorteio</button>
+<div id='c-result' class='no-display'>Resultado</div>
 </div><!-- #classic -->
 
 
@@ -131,14 +131,14 @@ Sortegram
 </div><!-- #sortegram -->
 
 <div id='start-sortegram' class='close lock-scroll'>
-  <button onclick='SSgo()' id='ss-generate' class='sort-btn'>Sortear</button>
-  <div id='SSresult' class='no-display'>Resultado</div>
+  <button onclick='sgStart()' id='sg-go' class='sort-btn'>Sortear</button>
+  <div id='sg-result' class='no-display'>Resultado</div>
   <dl id='user-names-2'></dl>
-  <div id='SScurrent'></div>
+  <div id='sg-current'></div>
   <div id='NoPdiv'>
   <span id='number-of-participants-2'></span> participante<span id='part-plural-2'></span>
   </div>
-  <button onclick='SSnew()' class='new-btn no-display'>Novo sorteio Sortegram</button>
+  <button onclick='sgNew()' class='new-btn no-display'>Novo sorteio Sortegram</button>
   <button onclick='home()' class='back-to-home-btn no-display'>Voltar para o início</button>
 </div><!-- #sortegram -->
 
