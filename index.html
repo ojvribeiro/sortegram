@@ -61,8 +61,8 @@ Sortegram
 <div id='sidebar-overlay'></div>
 <div id='sidebar' class='close'>
   <div class='sidebar-ops'>
-    <div id='homeBtn' class='sidebar-op' onclick='home()'>Novo Sorteio</div>
-    <div id='sg-manage-btn' class='sidebar-op' onclick='SG()'>Gerenciar</div>
+    <div id='homeBtn' class='sidebar-op' onclick='home()'>Novo</div>
+    <div id='sg-manage-btn' class='sidebar-op' onclick='sgManageBtn()'>Sorteio salvo</div>
     <div class='sidebar-op' onclick='window.localStorage.clear(); window.location.reload()'>Limpar dados</div>
     <div class='ui-color-picker'>
       <div style='margin-bottom: 10px'>Cor principal</div>
@@ -86,9 +86,11 @@ Sortegram
 
 <div id='sg-manage' class='close lock-scroll'>
   <div class='holder'>
-    <dl id='user-names-manage'></dl>
+    <dl id='user-names-manage' class='scroll'></dl>
     <button class='edit' onclick='editLast()'>Editar</button>
     <button class='delete' onclick='deleteRaffle()'>Excluir</button>
+    <button class='new-btn-manage' onclick='sgNew()'>Novo »</button>
+    <p>Isso não altera ou exclui o sorteio salvo</p>
   </div>
 </div>
 

@@ -26,7 +26,7 @@ var d = document,
     orange = ['#C7781B','#BD2F2F','#FFFFFF'],
     pink = ['#C35AC1','#FF8FF8','#FFD5FD'],
     lilac = ['#9B4AD0','#C79BEA','#FFFFFF'],
-    cyan = ['#009BA9','#79E1E4','#8DFFF5'],
+    cyan = ['#009BA9','#75CDEC','#8DFFF5'],
     violet = ['#96197C','#D84EFD','#F8CDFF'],
 
     // Number input vars
@@ -35,7 +35,7 @@ var d = document,
     y = document.getElementById( 'y' ),
 
     // DOM vars
-    $bg_uiColor = $( '#cover, #sidebar' ),
+    $bg_uiColor = $( '#cover, #sidebar, .splat-loader' ),
     $btn_uiColor = $( '.new-btn, .sort-btn, #c-result, #sg-done' ),
     $fnt_uiColor = $( '#input-username-lbl' ),
 
@@ -90,13 +90,13 @@ if ( _isNew === 'true' ) {
 if ( _isNew === 'false' ) {
   sgManage.style.display = show;
   deleteBtn.disabled = false;
+  $( '#user-names' ).html(_savedNamesEdit);
 }
 
 
 
 
 // Funções a serem carregadas na inicialização
-$('.splat-loader').fadeIn();
 function appLoad () {
         if ( !_uiColor ) {
           localStorage.setItem( 'ui-color','' );
@@ -143,7 +143,7 @@ function appLoad () {
         $('#content').show();
 
       setTimeout(function () {
-        $('.splat-loader-before').fadeOut('slow');
+        $('.splat-loader').fadeOut('slow');
       }, 2000);
 };
 //
@@ -198,6 +198,7 @@ function home() {
       $( '#sortegram' ).removeClass( 'open' ).addClass( 'close' );
         $( '#start-sortegram' ).removeClass( 'open' ).addClass( 'close' );
   document.getElementById( 'logo' ).innerHTML = 'Sortegram';
+  $( '#trophy' ).hide();
   sgQuit();
   cNew();
 }
@@ -206,7 +207,7 @@ function home() {
 
 
 // Gerenciar SS
-function sgManage () {
+function sgManageBtn () {
   cResult.style.color = '#FFF';
   cResult.style.backgroundColor = 'rgba(236, 248, 255, 0.5)';
   cResult.style.borderTop = '3px solid #FFF';
@@ -216,7 +217,8 @@ function sgManage () {
     $( '#classic' ).removeClass( 'open' ).addClass( 'close' );
       $( '#sortegram' ).removeClass( 'open' ).addClass( 'close' );
         $( '#start-sortegram' ).removeClass( 'open' ).addClass( 'close' );
-  document.getElementById( 'logo' ).innerHTML = 'Gerenciar';
+  document.getElementById( 'logo' ).innerHTML = 'Sorteio salvo';
+  $('#user-names-manage .delete-user').hide();
   sgQuit();
   cNew();
 }
@@ -231,6 +233,14 @@ function Last () {
       $( '#sortegram' ).removeClass( 'open' ).addClass( 'close' );
       $( '#start-sortegram' ).removeClass( 'open' ).addClass( 'close' );
       $( '#home' ).removeClass( 'open' ).addClass( 'close' );
+
+if ( $( '#user-names' ).html() === _savedNamesEdit ) {
+      $( '#user-names-manage' ).html(_savedNamesEdit);
+} else {
+      $( '#user-names-manage' ).html($( '#user-names' ).html());
+  }
+      document.getElementById( 'logo' ).innerHTML = 'Sorteio salvo';
+      $('#user-names-manage .delete-user').hide();
 }
 
 function editLast () {
@@ -252,6 +262,7 @@ function editLast () {
       saveBtn.innerHTML = 'Salvo';
       saveBtn.style.backgroundImage = 'url(img/ic_done_white_24dp_1x.png)';
 
+      Reload();
 }
 
 
@@ -512,15 +523,39 @@ function sbmt () { // Funcao que adiciona a lista o participante
 
   setTimeout(function () {
     inputUserNameLabel.innerHTML = 'Digite o nome do participante';
-    inputUserNameLabel.style.color = '#66FF73';
+    inputUserNameLabel.style.color = '#FFFFFF';
     $( inputUserNameLabel ).removeClass( 'error-shake' );
   }, 5000);
   }
 }
 
+
+/*//________________________________________________________
+ Este plugin foi postado por "Andrea" no StackOverflow.com
+-   permalink: http://stackoverflow.com/a/9964945
+-   uso:    $("input").enterKey(function () {
+            // Code
+            });
+*/
+$.fn.enterKey = function (fnc) {
+    return this.each(function () {
+        $(this).keypress(function (ev) {
+            var keycode = (ev.keyCode ? ev.keyCode : ev.which);
+            if (keycode == '13') {
+                fnc.call(this, ev);
+            }
+        })
+    })
+};
+//__________________________________________________________
+$(userName).enterKey(function () {
+  sbmt();
+});
+
 $( d ).on('click','.delete-user',function () {
       $( this ).parent().remove();
       $( '#user-names-2' ).html($( '#user-names' ).html());
+      $( '#user-names-manage' ).html($( '#user-names' ).html());
 
         changeNumber();
 
@@ -528,7 +563,6 @@ $( d ).on('click','.delete-user',function () {
         saveBtn.innerHTML = 'Salvar';
         saveBtn.style.backgroundImage = 'url(img/appbar.save.png)';
 
-        Reload();
 });
 
 
@@ -767,6 +801,8 @@ function sgSaveRaffle () {
       saveBtn.innerHTML = 'Salvo';
       saveBtn.style.backgroundImage = 'url(img/ic_done_white_24dp_1x.png)';
 
+      $( '#user-names-manage' ).html($( '#user-names' ).html());
+
       Reload();
     }
       else {
@@ -823,17 +859,6 @@ sgResult.style.backgroundColor = 'transparent';
 
 
 $( '.ui-color-picker .ui-color' ).on( 'click', function () {
-  swal({
-      title: 'Atenção!',
-      text: 'As configurações de cores precisam de um reinício do aplicativo para funcionar corretamente.',
-      type: 'warning',
-      showCancelButton: false,
-      confirmButtonColor: '#35B138',
-      confirmButtonText: 'Entendi!',
-      allowOutsideClick: true,
-      closeOnConfirm: false
-    });
-
 
     if ( $( this ).hasClass( 'verde' ) ) {
       $bg_uiColor.css( 'background-color', green[0] );
