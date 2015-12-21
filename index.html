@@ -4,8 +4,8 @@
 
   <meta charset='utf-8'>
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-	<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
-  <meta name='viewport' content='user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi' />
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
+  <meta content='user-scalable=no, initial-scale=1, width=device-width' id='viewport' name='viewport'>
   <meta name='application-name' content='Sortegram'>
   <meta name='author' content='Victor Ribeiro'>
   <meta name='email' content='victor_ribeiro135@hotmail.com'>
@@ -43,8 +43,15 @@ Sortegram
 
   </head>
 
-<body>
+<body onLoad="appLoad()">
 
+<div class="splat-loader-before">
+    <div class="splat-loader">
+        <div class="splat-loader-spinner"></div>
+    </div><!-- .splat-loader -->
+</div><!-- .splat-loader-before -->
+
+<div id='content' class='no-display'>
 <button id='navbar-ops-btn'></button>
 <div id='navbar-ops-btn-close'></div>
 
@@ -72,13 +79,14 @@ Sortegram
   </div>
 </div>
 
-<div id='home' class='open'>
-  <div id='sortegram-raffle' onclick="sgRaffle()"></div>
-  <div id='classic-raffle'></div>
+<div id='home' class='open lock-scroll'>
+  <div id='sortegram-raffle' onclick='sgRaffle()'></div>
+  <div id='classic-raffle' onclick='classicRaffle()'></div>
 </div>
 
-<div id='start' class='close'>
+<div id='manage' class='close lock-scroll'>
   <div class='holder'>
+    <dl id='user-names-manage'></dl>
     <button class='edit' onclick='editLast()'>Editar</button>
     <button class='delete' onclick='deleteRaffle()'>Excluir</button>
   </div>
@@ -86,7 +94,7 @@ Sortegram
 
 <div id='cover'></div>
 
-<div id='classic' class='close'>
+<div id='classic' class='close lock-scroll'>
 
 <div class='min-max'>
 <div class='resizing-input'>
@@ -107,8 +115,8 @@ Sortegram
 
 
 
-<div id='sortegram' class='close'>
-  <input type="checkbox" id="is-new" class="no-display" />
+<div id='sortegram' class='close lock-scroll'>
+  <input type='checkbox' id='is-new' class='no-display' />
   <input id='username' class='input-username' type='text' placeholder='participante' autocomplete='off' />
   <input onclick='sbmt()' id='username-btn' class='input-username-btn' type='button' value=' ' />
   <br>
@@ -117,12 +125,12 @@ Sortegram
   <span id='number-of-participants'></span> participante<span id='part-plural'></span>
   <br><br>
   <button id='delete-all' onclick='deleteRaffle()'>Excluir</button>
-  <button id='sg-save' disabled>Salvar</button>
+  <button id='sg-save' onclick="sgSaveRaffle()" disabled>Salvar</button>
   <dl id='user-names'></dl>
-  <button id='sg-done'></button>
+  <button id='sg-done' onclick="sgRaffleReady()"></button>
 </div><!-- #sortegram -->
 
-<div id='start-sortegram' class='close'>
+<div id='start-sortegram' class='close lock-scroll'>
   <button onclick='SSgo()' id='ss-generate' class='sort-btn'>Sortear</button>
   <div id='SSresult' class='no-display'>Resultado</div>
   <dl id='user-names-2'></dl>
@@ -134,7 +142,8 @@ Sortegram
   <button onclick='home()' class='back-to-home-btn no-display'>Voltar para o início</button>
 </div><!-- #sortegram -->
 
+</div><!-- #content -->
 
-<script src='js/sortegram.js'></script>
+<script src='js/sortegram.dev.js'></script>
 </body>
 </html>
