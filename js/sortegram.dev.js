@@ -89,7 +89,6 @@ if ( _isNew === 'true' ) {
 }
 if ( _isNew === 'false' ) {
   sgManage.style.display = show;
-  deleteBtn.disabled = false;
   $( '#user-names' ).html(_savedNamesEdit);
 }
 
@@ -236,7 +235,11 @@ function Last () {
 
 if ( $( '#user-names' ).html() === _savedNamesEdit ) {
       $( '#user-names-manage' ).html(_savedNamesEdit);
-} else {
+}
+ else if ( $( '#user-names' ).html() === '' ) {
+      $( '#user-names-manage' ).html($( '#user-names' ).html());
+}
+ else {
       $( '#user-names-manage' ).html($( '#user-names' ).html());
   }
       document.getElementById( 'logo' ).innerHTML = 'Sorteio salvo';
@@ -322,6 +325,7 @@ function sgNew () {
 
 
 function sgQuit () {
+  $( '#trophy' ).hide();
   sgGo.style.display = show;
   sgResult.style.display = hide;
   $( '.new-btn, .back-to-home-btn' ).hide();
@@ -441,6 +445,9 @@ if ( n.value !== '' ) { // Se o campo n NAO estiver vazio...
 
   }, 4000);
   }
+    else if ( Number(n.value) >= Number(y.value) ) {
+      swal('Erro :(','asdadwdwadawdawdwdwwe.','error');
+    }
     else {
       swal('Erro :(','Preencha os campos de número Máximo e Mínimo corretamente.','error');
     }
@@ -504,8 +511,6 @@ function sbmt () { // Funcao que adiciona a lista o participante
         saveBtn.innerHTML = 'Salvar';
         saveBtn.style.backgroundImage = 'url(img/appbar.save.png)';
 
-        userName.blur(); userName.select();
-
           savedNamesEdit = document.getElementById( 'user-names' ).innerHTML +=
           '<dt><div class=\'dt-text\'>'
           + userName.value
@@ -528,29 +533,6 @@ function sbmt () { // Funcao que adiciona a lista o participante
   }, 5000);
   }
 }
-
-
-/*//________________________________________________________
- Este plugin foi postado por "Andrea" no StackOverflow.com
--   permalink: http://stackoverflow.com/a/9964945
--   uso:    $("input").enterKey(function () {
-            // Code
-            });
-*/
-$.fn.enterKey = function (fnc) {
-    return this.each(function () {
-        $(this).keypress(function (ev) {
-            var keycode = (ev.keyCode ? ev.keyCode : ev.which);
-            if (keycode == '13') {
-                fnc.call(this, ev);
-            }
-        })
-    })
-};
-//__________________________________________________________
-$(userName).enterKey(function () {
-  sbmt();
-});
 
 $( d ).on('click','.delete-user',function () {
       $( this ).parent().remove();
@@ -685,7 +667,7 @@ $( '#user-names-2' ).animate({
         // Permite o scroll quando o sorteio termina
         $( '#user-names-2' ).removeClass( 'lock-scroll' ).addClass( 'scroll' );
 
-          sgResult.innerHTML = $( '#user-names-2 dt:nth-child('+sortear+')' ).children().html();
+          sgResult.innerHTML = sortear + ". " + $( '#user-names-2 dt:nth-child('+sortear+')' ).children().html();
           sgResult.style.backgroundColor = 'rgba(0, 0, 0, 0.3)';
 
           $( '.new-btn, .back-to-home-btn' ).show(); // Mostra o botao 'Novo Sorteio'
@@ -725,12 +707,25 @@ function cRaffle () {
 
 // Funcao para selecionar o SS
 function sgRaffle () {
-
   if ( isNew.checked === true ) { // Se NAO EXISTE jogo salvo
     sgNew();
   }
   else if ( isNew.checked === false ) { // Se EXISTE jogo salvo
-    Last();
+    swal({
+    title: "Já existe um sorteio salvo",
+    text: "Deseja editar o sorteio salvo ou criar um novo?",
+    type: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#00AD2B",
+    confirmButtonText: "Novo",
+    cancelButtonText: "Editar"
+    }, function(isConfirm){
+      if (isConfirm) {
+        sgNew();
+        } else {
+          editLast();
+          }
+          });
   }
 }
 
@@ -914,6 +909,16 @@ $( '.ui-color-picker .ui-color' ).on( 'click', function () {
       $fnt_uiColor.css( 'color', violet[2] );
       localStorage.setItem( 'ui-color','violet' );
     }
+
+
+    swal({
+        title: 'Aguarde...',
+        text: 'Salvando alterações...',
+        type: 'success',
+        showConfirmButton: false,
+        timer: 3000,
+        allowOutsideClick: true
+      });
 });
 
 
@@ -942,6 +947,16 @@ n.onchange = function () {
 x.onchange = function () {
     if ( Number(x.value) >= Number(y.value) ) {
       x.value = y.value - 2;
+    }
+    if ( Number(n.value) >= Number(y.value)
+      || Number(n.value) > Number(y.value) - x.value ) {
+      n.value = y.value - x.value;
+    }
+}
+
+y.onchange = function () {
+    if ( Number(y.value) <= Number(x.value) ) {
+      y.value = Number(x.value) + 2;
     }
     if ( Number(n.value) >= Number(y.value)
       || Number(n.value) > Number(y.value) - x.value ) {

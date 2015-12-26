@@ -41,9 +41,21 @@
 Sortegram
 </title>
 
+
+<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
   </head>
 
 <body onLoad="appLoad()">
+
+<div class="preload-images"></div>
+
+<!--[if lt IE 7]>
+	<p class="browsehappy">Você está usando um navegador <strong>antigo</strong>. Por favor, <a href="http://browsehappy.com/">atualize seu navegador</a> para melhorar sua experiência com o Sortegram.</p>
+<![endif]-->
 
 <div class="splat-loader-before">
     <div class="splat-loader">
@@ -120,13 +132,13 @@ Sortegram
 <div id='sortegram' class='close lock-scroll'>
   <input type='checkbox' id='is-new' class='no-display' />
   <input id='username' class='input-username' type='text' placeholder='participante' autocomplete='off' />
-  <input onclick='sbmt()' id='username-btn' class='input-username-btn' type='button' value=' ' />
+  <input onmousedown='sbmt()' onmouseup='userName.select();' id='username-btn' class='input-username-btn' type='button' value=' ' />
   <br>
   <label for='username' id='input-username-lbl'>Digite o nome do participante</label>
   <br><br>
   <span id='number-of-participants'></span> participante<span id='part-plural'></span>
   <br><br>
-  <button id='delete-all' onclick='deleteRaffle()'>Excluir</button>
+  <button id='cancel-btn' onclick='home()'>Cancelar</button>
   <button id='sg-save' onclick="sgSaveRaffle()" disabled>Salvar</button>
   <dl id='user-names'></dl>
   <button id='sg-done' onclick="sgRaffleReady()"></button>

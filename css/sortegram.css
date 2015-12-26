@@ -1,7 +1,7 @@
 
 body, html {
   font-family: Segoe UI;
-  background: #FFF;
+  background-color: #FFF;
   color: #fff;
   user-select: none;
   -webkit-user-select: none;
@@ -11,6 +11,10 @@ body, html {
   margin: 0;
   overflow: hidden;
   touch-action: none;
+  -webkit-touch-action: none;
+  -moz-touch-action: none;
+  -ms-touch-action: none;
+  -o-touch-action: none;
 }
 
 #content {
@@ -20,21 +24,22 @@ body, html {
   top: 0;
   left: 0;
   z-index: 0;
+  overflow: hidden;
 }
 
 .preload-images {
   display: none;
   width: 0;
   height: 0;
-  background: url(../appbar.add.png),
-              url(../appbar.close.png),
-              url(../appbar.delete.png),
-              url(../appbar.lines.horizontal.4-2.png),
-              url(../appbar.save.png),
-              url(../appbar.sort.numeric.png),
-              url(../appbar.trophy.png),
-              url(../ic_arrow_forward_white_24dp_2x.png),
-              url(../ic_done_white_24dp_1x.png);
+  background: url(../img/appbar.add.png),
+              url(../img/appbar.close.png),
+              url(../img/appbar.delete.png),
+              url(../img/appbar.lines.horizontal.4-2.png),
+              url(../img/appbar.save.png),
+              url(../img/appbar.sort.numeric.png),
+              url(../img/appbar.trophy.png),
+              url(../img/ic_arrow_forward_white_24dp_2x.png),
+              url(../img/ic_done_white_24dp_1x.png);
 }
 
 input, button {
@@ -485,10 +490,6 @@ background-color: #FF00CB;
   width: 100%;
   max-width: 100%;
   min-height: 100%;
-  min-height: 100%;
-  min-height: 100%;
-  min-height: 100%;
-  min-height: 100%;
   text-align: center;
   position: fixed;
   top: 0;
@@ -539,7 +540,7 @@ background-color: #FF00CB;
 }
 
 .sort-btn {
-  position: relative;
+    position: relative;
     margin-top: 60px;
     bottom: 0%;
     left: 0%;
@@ -570,14 +571,14 @@ background-color: #FF00CB;
     color: #ffffff;
 }
 .sort-btn:disabled {
-    background: #D9D9D9;
+    background-color: #D9D9D9;
     color: rgb(117, 117, 117);
     text-shadow: 1px 1px 0px #FFF;
 }
 
 .new-btn, .new-btn-manage {
-  position: relative;
-  margin-top: 5px;
+    position: relative;
+    margin-top: 5px;
     bottom: 0%;
     left: 0%;
     font-size: 16pt;
@@ -607,7 +608,7 @@ background-color: #FF00CB;
     color: #ffffff;
 }
 .new-btn:disabled {
-    background: #D9D9D9;
+    background-color: #D9D9D9;
     color: rgb(117, 117, 117);
 }
 
@@ -641,7 +642,7 @@ background-color: #FF00CB;
     color: #ffffff;
 }
 .back-to-home-btn:disabled {
-    background: #D9D9D9;
+    background-color: #D9D9D9;
     color: rgb(117, 117, 117);
     text-shadow: 1px 1px 0px #FFF;
     border: 5px solid transparent;
@@ -717,30 +718,30 @@ background-color: #FF00CB;
   100% {transform: rotateX(720deg);}
 }
 @-webkit-keyframes result-rotate {
-  0% {transform: rotateX(0deg);}
-  100% {transform: rotateX(720deg);}
+  0% {-webkit-transform: rotateX(0deg);}
+  100% {-webkit-transform: rotateX(720deg);}
 }
 @-moz-keyframes result-rotate {
-  0% {transform: rotateX(0deg);}
-  100% {transform: rotateX(720deg);}
+  0% {-moz-transform: rotateX(0deg);}
+  100% {-moz-transform: rotateX(720deg);}
 }
 @-ms-keyframes result-rotate {
-  0% {transform: rotateX(0deg);}
-  100% {transform: rotateX(720deg);}
+  0% {-ms-transform: rotateX(0deg);}
+  100% {-ms-transform: rotateX(720deg);}
 }
 @-o-keyframes result-rotate {
-  0% {transform: rotateX(0deg);}
-  100% {transform: rotateX(720deg);}
+  0% {-o-transform: rotateX(0deg);}
+  100% {-o-transform: rotateX(720deg);}
 }
 
 .input-username {
-  padding: 0 45px 0 10px;
+    padding: 0 45px 0 10px;
     width: 60%;
     max-width: 60%;
     height: 45px;
-    color: #FFF;
+    color: #000;
     font-size: 14pt;
-    background: transparent;
+    background-color: rgba(255, 255, 255, 0.5);
     border: 0;
     border-bottom: 4px solid #fff;
 }
@@ -811,8 +812,8 @@ background-color: #FF00CB;
     -o-transition: .1s ease;
 }
 .input-username-btn:active, .input-username-btn:hover {
-  background-color: rgba(0, 0, 0, 0.3);
-  }
+    background-color: rgba(0, 0, 0, 0.3);
+}
 
 #user-names {
   counter-reset: user-luck-number;
@@ -901,54 +902,54 @@ background-color: #FF00CB;
 }
 
 #user-names-2 dt:before {
-  content: counter(user-luck-number);
-  counter-increment: user-luck-number;
-  color: #B5B5B5;
-  padding-right: 50px;
-  padding-top: 4px;
-  float: left;
-  padding-bottom: 16px;
-  font-size: 11pt;
+    content: counter(user-luck-number);
+    counter-increment: user-luck-number;
+    color: #B5B5B5;
+    padding-right: 50px;
+    padding-top: 4px;
+    float: left;
+    padding-bottom: 16px;
+    font-size: 11pt;
 }
 
 #user-names-manage {
-  counter-reset: user-luck-number;
-  line-height: 1;
-  text-align: left;
-  position: relative;
-  width: 100%;
-  max-height: 170px;
-  transition: .2s ease;
-  -webkit-transition: .2s ease;
-  -moz-transition: .2s ease;
-  -ms-transition: .2s ease;
-  -o-transition: .2s ease;
+    counter-reset: user-luck-number;
+    line-height: 1;
+    text-align: left;
+    position: relative;
+    width: 100%;
+    max-height: 170px;
+    transition: .2s ease;
+    -webkit-transition: .2s ease;
+    -moz-transition: .2s ease;
+    -ms-transition: .2s ease;
+    -o-transition: .2s ease;
 }
 
 #user-names-manage dt {
-  background-color: rgba(0, 0, 0, 0.2);
-  color: #fff;
-  text-align: left;
-  border-bottom: 1px solid #D4D4D4;
-  padding-top: 15px;
-  padding-left: 4px;
-  height: 30px;
-  transition: .2s ease;
-  -webkit-transition: .2s ease;
-  -moz-transition: .2s ease;
-  -ms-transition: .2s ease;
-  -o-transition: .2s ease;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #fff;
+    text-align: left;
+    border-bottom: 1px solid #D4D4D4;
+    padding-top: 15px;
+    padding-left: 4px;
+    height: 30px;
+    transition: .2s ease;
+    -webkit-transition: .2s ease;
+    -moz-transition: .2s ease;
+    -ms-transition: .2s ease;
+    -o-transition: .2s ease;
 }
 
 #user-names-manage dt:before {
-  content: counter(user-luck-number);
-  counter-increment: user-luck-number;
-  color: #B5B5B5;
-  padding-right: 50px;
-  padding-top: 4px;
-  float: left;
-  padding-bottom: 16px;
-  font-size: 11pt;
+    content: counter(user-luck-number);
+    counter-increment: user-luck-number;
+    color: #B5B5B5;
+    padding-right: 50px;
+    padding-top: 4px;
+    padding-bottom: 16px;
+    font-size: 11pt;
+    float: left;
 }
 
 #number-of-participants {
@@ -1042,6 +1043,31 @@ background-color: #FF00CB;
     -o-transform: scale(.9);
 }
 
+#cancel-btn {
+    font-size: 12pt;
+    color: #fff;
+    border: 0;
+    height: 60px;
+    width: 49%;
+    background-color: #FF6666;
+    background-image: url(../img/appbar.close.png);
+    background-size: auto 50%;
+    background-position: 10%;
+    background-repeat: no-repeat;
+    transition: .1s ease;
+    -webkit-transition: .1s ease;
+    -moz-transition: .1s ease;
+    -ms-transition: .1s ease;
+    -o-transition: .1s ease;
+}
+#cancel-btn:active {
+    background-color: #9A3E3E;
+    transform: scale(.9);
+    -webkit-transform: scale(.9);
+    -moz-transform: scale(.9);
+    -ms-transform: scale(.9);
+    -o-transform: scale(.9);
+}
 
 #sg-save {
     font-size: 13pt;
@@ -1200,14 +1226,17 @@ background-color: #FF00CB;
     top: -webkit-calc(50% - 50px);
     top: -moz-calc(50% - 50px);
     top: -ms-calc(50% - 50px);
+    top: -o-calc(50% - 50px);
     left: calc(50% - 50px);
     left: -webkit-calc(50% - 50px);
     left: -moz-calc(50% - 50px);
     left: -ms-calc(50% - 50px);
+    left: -o-calc(50% - 50px);
     animation: loader-spinner 1s infinite linear;
     -webkit-animation: loader-spinner 1s infinite linear;
     -moz-animation: loader-spinner 1s infinite linear;
     -ms-animation: loader-spinner 1s infinite linear;
+    -o-animation: loader-spinner 1s infinite linear;
 }
 
 @keyframes loader-spinner {
@@ -1221,6 +1250,9 @@ background-color: #FF00CB;
 }
 @-ms-keyframes loader-spinner {
     100% {-ms-transform: rotate(360deg)}
+}
+@-o-keyframes loader-spinner {
+    100% {-o-transform: rotate(360deg)}
 }
 
 
