@@ -3,14 +3,22 @@
   <head>
 
   <meta charset='utf-8'>
-  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
-  <meta content='user-scalable=no, initial-scale=1, width=device-width' id='viewport' name='viewport'>
-  <meta name='application-name' content='Sortegram'>
+
+  <meta property='og:url' content='http://sortegram.com'>
+  <meta http-equiv='Content-Language' content='pt-br'>
   <meta name='author' content='Victor Ribeiro'>
   <meta name='email' content='victor_ribeiro135@hotmail.com'>
-  <meta name='description' content='Sorteios'>
+
+  <meta name='description' content='Sortegram — Faça sorteios de números, pessoas e coisas, ou joge cara ou coroa.'>
+  <meta property='og:description' content='Sortegram — Faça sorteios de números, pessoas e coisas, ou joge cara ou coroa'>
+
+  <meta content='IE=edge' http-equiv='X-UA-Compatible'>
   <meta content='chrome=1' http-equiv='X-UA-Compatible'>
+
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'>
+  <meta content='user-scalable=no, initial-scale=1, width=device-width' id='viewport' name='viewport'>
+  <meta name='application-name' content='Sortegram'>
+
   <meta content='notranslate' name='google'>
   <meta name='format-detection' content='telephone=no'>
   <meta name='msapplication-tap-highlight' content='no'>
@@ -29,8 +37,10 @@
 <meta name='msapplication-TileImage' content='img/logo/white/SG-icon-144.png'/>
 <meta name='msapplication-TileColor' content='#00A90E'/>
 
+<link rel='stylesheet' href='css/animate.css' />
 <link rel='stylesheet' href='css/sweetalert.css' />
 <link rel='stylesheet' href='css/sortegram.css' />
+<link rel='stylesheet' href='css/jquery.mCustomScrollbar.css'>
 
 <script src='js/jquery.min.js'></script>
 <script src='js/jquery-ui.min.js'></script>
@@ -43,41 +53,54 @@ Sortegram
 
 
 <!--[if lt IE 9]>
-	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<script src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js'></script>
+	<script src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js'></script>
 <![endif]-->
 
   </head>
 
-<body onLoad="appLoad()">
+<body onLoad='appLoad()'>
 
-<div class="preload-images"></div>
+<div class='preload-images'></div>
+
 
 <!--[if lt IE 7]>
-	<p class="browsehappy">Você está usando um navegador <strong>antigo</strong>. Por favor, <a href="http://browsehappy.com/">atualize seu navegador</a> para melhorar sua experiência com o Sortegram.</p>
+	<p class='browsehappy'>Você está usando um navegador <strong>antigo</strong>. Por favor, <a href='http://browsehappy.com/'>atualize seu navegador</a> para melhorar sua experiência com o Sortegram.</p>
 <![endif]-->
 
-<div class="splat-loader-before">
-    <div class="splat-loader">
-        <div class="splat-loader-spinner"></div>
-    </div><!-- .splat-loader -->
-</div><!-- .splat-loader-before -->
+<div class='animated splash-loader fadeIn'>
+  <div class='splash-loader-spinner spining'></div>
+</div><!-- .splash-loader -->
+
+
+<div id='cover' class='bg_uiColor'></div>
+
+
+<div class='splash-orientation no-display'>
+  <div class='splash-orientation-img-right no-display'></div>
+  <div class='splash-orientation-img-left no-display'></div>
+</div><!-- .splash-orientation -->
 
 <div id='content' class='no-display'>
 <button id='navbar-ops-btn'></button>
 <div id='navbar-ops-btn-close'></div>
 
-<div id='logo'>Sortegram</div>
+<div id='statusTitle_Bar' class='bd_fntColor'>Início</div>
 
 
 <div id='sidebar-overlay'></div>
-<div id='sidebar' class='close'>
+<div id='sidebar' class='bg_uiColor bd_fntColor close'>
   <div class='sidebar-ops'>
-    <div id='homeBtn' class='sidebar-op' onclick='home()'>Novo</div>
-    <div id='sg-manage-btn' class='sidebar-op' onclick='sgManageBtn()'>Sorteio salvo</div>
-    <div class='sidebar-op' onclick='window.localStorage.clear(); window.location.reload()'>Limpar dados</div>
+    <div id='homeBtn' class='sidebar-op sidebar-op-1' onclick='go_Home()'>Início</div>
+    <div id='sg-new-btn' class='sidebar-op sidebar-op-2' onclick='sgNew()'>Novo sorteio</div>
+    <div id='sg-manage-btn' class='sidebar-op sidebar-op-3 no-display' onclick='ManageAllBtn()'>Sorteios salvos</div>
+    <div class='sidebar-op sidebar-op-5' onclick='Config()'>Configurações</div>
+    <div id="pause-fullScreen-off" class='sidebar-op-6 no-display'>Sair da tela cheia</div>
+    <div id="pause-fullScreen-on" class='sidebar-op-7'>Tela cheia</div>
+
+
     <div class='ui-color-picker'>
-      <div style='margin-bottom: 10px'>Cor principal</div>
+      <div style='margin-bottom: 10px'>Cor do tema</div>
       <div class='ui-color verde'></div>
       <div class='ui-color azul'></div>
       <div class='ui-color vermelho'></div>
@@ -87,77 +110,369 @@ Sortegram
       <div class='ui-color lilas'></div>
       <div class='ui-color ciano'></div>
       <div class='ui-color violeta'></div>
+      <br><p style='font-size: 8pt'>Claro <input id='is-light' type='checkbox' />
+      <label id='is-light-cb' for='is-light'></label> Escuro</p>
     </div>
   </div>
 </div>
 
-<div id='home' class='open lock-scroll'>
-  <div id='sg-raffle' onclick='sgRaffle()'></div>
-  <div id='c-raffle' onclick='cRaffle()'></div>
+<div id='home' class='page open lock-scroll'>
+<div id='home-holder'>
+  <center>
+    <div id='sg-raffle' class='fnt_uiColor bgDark_uiColor home-icon' onclick='sgRaffle()'></div>
+    <div id='c-raffle' class='fnt_uiColor bgDark_uiColor home-icon' onclick='cRaffle()'></div>
+    <div id='cc-raffle' class='fnt_uiColor bgDark_uiColor home-icon' onclick='ccRaffle()'></div>
+    <div id='b-raffle' class='fnt_uiColor bgDark_uiColor home-icon no-display' onclick='bRaffle()'></div>
+  </center>
+</div>
 </div>
 
-<div id='sg-manage' class='close lock-scroll'>
-  <div class='holder'>
-    <dl id='user-names-manage' class='scroll'></dl>
-    <button class='edit' onclick='editLast()'>Editar</button>
-    <button class='delete' onclick='deleteRaffle()'>Excluir</button>
-    <button class='new-btn-manage' onclick='sgNew()'>Novo »</button>
-    <p>Isso não altera ou exclui o sorteio salvo</p>
-  </div>
-</div>
 
-<div id='cover'></div>
 
-<div id='classic' class='close lock-scroll'>
-
+<div id='classic' class='page close lock-scroll'>
+<br>
 <div class='min-max'>
 <div class='resizing-input'>
-  Sortear <input id='n' class='input-min-max' type='number' placeholder='n' value='1' min='1' /> número<span id='numb-plural'></span> <br><br>
-  de <input id='x' class='input-min-max' type='number' placeholder='x' min='0' value='1' />
+  <span>Sortear</span> <input id='n' class='input-min-max' type='number' placeholder='n' value='1' min='1' /> <span>número<span id='numb-plural'></span></span> <br><br>
+  <span>de</span> <input id='x' class='input-min-max' type='number' placeholder='x' min='0' value='1' />
   <span></span>
 </div>
 <div class='resizing-input'>
-  a <input id='y' class='input-min-max' type='number' placeholder='y' min='0' value='100' />
+  <span>a</span> <input id='y' class='input-min-max' type='number' placeholder='y' min='0' value='100' />
   <span></span>
 </div>
 </div><!-- .min-max -->
-<button onclick='cStart()' id='c-go' class='sort-btn'>Sortear</button>
-<div id='c-current'></div>
-<button onclick='cNew()' class='new-btn no-display'>Novo Sorteio</button>
+<button id='c-go' onclick='cStart()' class='btn_uiColor fnt_uiColor sort-btn tip'>Sortear</button>
+
 <div id='c-result' class='no-display'>Resultado</div>
+<div id='c-current' class='bd_fntColor'></div>
+
+<div class='sg_SavedRaffles_Btn'>
+  <button class='btn_uiColor saved-raffle-button saved-raffle-button-home-back' onclick='go_Home()'></button>
+  <button onclick='cNew()' class='btn_uiColor no-display tip saved-raffle-button saved-raffle-button-refresh'></button>
+</div>
+
 </div><!-- #classic -->
 
 
 
-<div id='sortegram' class='close lock-scroll'>
-  <input type='checkbox' id='is-new' class='no-display' />
-  <input id='username' class='input-username' type='text' placeholder='participante' autocomplete='off' />
-  <input onmousedown='sbmt()' onmouseup='userName.select();' id='username-btn' class='input-username-btn' type='button' value=' ' />
+<div id='sortegram' class='page close lock-scroll'>
+  <input id='is-new' type='checkbox' class='no-display' />
+
+  <div class='saved_item-rename-btn' id='sg_Rename-1'></div>
+  <div class='saved_item-rename-btn' id='sg_Rename-2'></div>
+  <div class='saved_item-rename-btn' id='sg_Rename-3'></div>
+  <div class='saved_item-rename-btn' id='sg_Rename-4'></div>
+  <div class='saved_item-rename-btn' id='sg_Rename-5'></div>
+  <div class='saved_item-rename-btn' id='sg_Rename-6'></div>
+  <div class='saved_item-rename-btn' id='sg_Rename-7'></div>
+  <div class='saved_item-rename-btn' id='sg_Rename-8'></div>
+  <div class='saved_item-rename-btn' id='sg_Rename-9'></div>
+  <div class='saved_item-rename-btn' id='sg_Rename-10'></div>
+
+  <input id='userName_Input' class='fnt_uiColor bgDark_uiColor userName_Input' type='text' placeholder='participante' autocomplete='off' />
+  <input id='username-btn' onmousedown='submit_Item()' onmouseup='userName_Input.select();' class='userName_Input-btn' type='button' value=' ' />
   <br>
-  <label for='username' id='input-username-lbl'>Digite o nome do participante</label>
+  <label id='userName_Input-Label' for='userName_Input' class='bd_fntColor'>Digite o nome do participante</label>
   <br><br>
-  <span id='number-of-participants'></span> participante<span id='part-plural'></span>
+  <span id='part_Number'></span> <span>participante</span><span id='part-plural'></span>
   <br><br>
-  <button id='cancel-btn' onclick='home()'>Cancelar</button>
-  <button id='sg-save' onclick="sgSaveRaffle()" disabled>Salvar</button>
-  <dl id='user-names'></dl>
-  <button id='sg-done' onclick="sgRaffleReady()"></button>
+
+  <button id='sg_Delete' class='btn_uiColor sg_Delete no-display' onclick='deleteCurrentNew()'></button>
+
+  <button id='sg_Delete-1' class='btn_uiColor sg_Delete no-display'></button>
+  <button id='sg_Delete-2' class='btn_uiColor sg_Delete no-display'></button>
+  <button id='sg_Delete-3' class='btn_uiColor sg_Delete no-display'></button>
+  <button id='sg_Delete-4' class='btn_uiColor sg_Delete no-display'></button>
+  <button id='sg_Delete-5' class='btn_uiColor sg_Delete no-display'></button>
+  <button id='sg_Delete-6' class='btn_uiColor sg_Delete no-display'></button>
+  <button id='sg_Delete-7' class='btn_uiColor sg_Delete no-display'></button>
+  <button id='sg_Delete-8' class='btn_uiColor sg_Delete no-display'></button>
+  <button id='sg_Delete-9' class='btn_uiColor sg_Delete no-display'></button>
+  <button id='sg_Delete-10' class='btn_uiColor sg_Delete no-display'></button>
+
+  <button id='toggle-at' class='btn_uiColor toggle-at-off'></button>
+
+  <button id='sg_Save' class='btn_uiColor sg_Save no-display' onclick='sg_Save()' disabled></button>
+
+  <button id='sg_Save-1' class='btn_uiColor sg_Save no-display' disabled></button>
+  <button id='sg_Save-2' class='btn_uiColor sg_Save no-display' disabled></button>
+  <button id='sg_Save-3' class='btn_uiColor sg_Save no-display' disabled></button>
+  <button id='sg_Save-4' class='btn_uiColor sg_Save no-display' disabled></button>
+  <button id='sg_Save-5' class='btn_uiColor sg_Save no-display' disabled></button>
+  <button id='sg_Save-6' class='btn_uiColor sg_Save no-display' disabled></button>
+  <button id='sg_Save-7' class='btn_uiColor sg_Save no-display' disabled></button>
+  <button id='sg_Save-8' class='btn_uiColor sg_Save no-display' disabled></button>
+  <button id='sg_Save-9' class='btn_uiColor sg_Save no-display' disabled></button>
+  <button id='sg_Save-10' class='btn_uiColor sg_Save no-display' disabled></button>
+
+  <button id='sg-done' class='btn_uiColor' onclick='sg_Ready()'></button>
+
+  <dl id='part_List'></dl>
 </div><!-- #sortegram -->
 
-<div id='start-sortegram' class='close lock-scroll'>
-  <button onclick='sgStart()' id='sg-go' class='sort-btn'>Sortear</button>
-  <div id='sg-result' class='no-display'>Resultado</div>
-  <dl id='user-names-2'></dl>
-  <div id='sg-current'></div>
-  <div id='NoPdiv'>
-  <span id='number-of-participants-2'></span> participante<span id='part-plural-2'></span>
+<div id='start-sortegram' class='page close lock-scroll'>
+<div class='sg_Page-holder'>
+  <div id='sg-result' class='no-display'></div>
+  <dl id='part_List-2' class='bd_fntColor'></dl>
+  <div id='sg-current' class='fnt_uiColor bd_fntColor no-display'></div>
+
+<div id='part_NumberDiv' class='bd_fntColor'>
+  <span id='part_Number-2'></span> participante<span id='part-plural-2'></span>
+</div>
+
+<div id='sg_start_Winners'>
+  <span>Quant. de ganhadores</span><br><br>
+
+  <span id='sg-start-radio-span-1' class='sg-start-radio-span sg-start-radio-span-active bg_uiColor'>
+    <input type='radio' id='sg-start-radio-1' name='sg-start-radio' checked /><label for='sg-start-radio-1'><span class='pointer fnt_uiColor'>Apenas um</span></label>
+  </span>
+  <span id='sg-start-radio-span-2' class='sg-start-radio-span bg_uiColor'>
+    <input type='radio' id='sg-start-radio-2' name='sg-start-radio' /><label for='sg-start-radio-2'><span class='pointer fnt_uiColor'>Vários</span></label>
+  </span>
+
+  <br><br>
+
+  <div class='sg_start_WinNumb no-display'>
+    <span>Sortear</span>
+    <input type='number' id='input_winnersAmount' class='input_winnersAmount' value='2' min='2' />
+    <span>ganhadores</span>
   </div>
-  <button onclick='sgNew()' class='new-btn no-display'>Novo sorteio Sortegram</button>
-  <button onclick='home()' class='back-to-home-btn no-display'>Voltar para o início</button>
+</div>
+
+<div id='sg-go' onclick='sg_Start()' class='btn_uiColor fnt_uiColor sort-btn tip'>Sortear</div>
+
+
+  <div id='sg_start_Btn' class='no-display'>
+    <button onclick='go_Home()' class='btn_uiColor saved-raffle-button saved-raffle-button-home'></button>
+    <button onclick='sg_Repeat()' class='btn_uiColor saved-raffle-button saved-raffle-button-refresh'></button>
+  </div>
+</div>
 </div><!-- #sortegram -->
+
+
+<div id='sg_SavedRaffles' class='page close lock-scroll'>
+
+  <div class='sg_SavedRaffles_Btn'>
+    <button class='btn_uiColor saved-raffle-button saved-raffle-button-home-back' id='saved-raffle-button-home-back'></button>
+    <button class='btn_uiColor saved-raffle-button saved-raffle-button-select saved-raffle-button-select-inactive' id='saved-raffle-button-select'></button>
+    <button class='btn_uiColor saved-raffle-button saved-raffle-button-delete-selected' id='saved-raffle-button-delete-selected' disabled></button>
+    <button class='btn_uiColor saved-raffle-button saved-raffle-button-new' id='saved-raffle-button-new'></button>
+  </div>
+
+    <div class='saved_item_Holder'>
+
+      <div class='saved_item-info-btn' id='saved_item-info-btn-1'></div>
+      <div class='fnt_uiColor bgDark_uiColor saved_item no-display' id='saved_item-1'>
+          <div class='saved_item-cb saved_item-cb-no-selected saved_item-cb-close' id='saved_item-cb-1'>
+            <input type='checkbox' id='saved_item-check-1' />
+          </div>
+      <div class='saved_item-name' id='saved_item-name-1'></div><br><br>
+      <div class='saved_item-PartAmount' id='saved_item-PartAmount-1'></div>
+      <div class='saved_item-start-btn btn_uiColor' id='saved_item-start-btn-1'></div>
+      <div class='saved_item-edit-btn bgDark_uiColor' id='saved_item-edit-btn-1'></div>
+      <div class='saved_item-delete-btn bgDark_uiColor' id='saved_item-delete-btn-1'></div>
+    </div>
+
+    <div class='saved_item-info-btn' id='saved_item-info-btn-2'></div>
+    <div class='fnt_uiColor bgDark_uiColor saved_item no-display' id='saved_item-2'>
+          <div class='saved_item-cb saved_item-cb-no-selected saved_item-cb-close' id='saved_item-cb-2'>
+            <input type='checkbox' id='saved_item-check-2' />
+          </div>
+      <div class='saved_item-name' id='saved_item-name-2'></div><br><br>
+      <div class='saved_item-PartAmount' id='saved_item-PartAmount-2'></div>
+      <div class='saved_item-start-btn btn_uiColor' id='saved_item-start-btn-2'></div>
+      <div class='saved_item-edit-btn bgDark_uiColor' id='saved_item-edit-btn-2'></div>
+      <div class='saved_item-delete-btn bgDark_uiColor' id='saved_item-delete-btn-2'></div>
+    </div>
+
+    <div class='saved_item-info-btn' id='saved_item-info-btn-3'></div>
+    <div class='fnt_uiColor bgDark_uiColor saved_item no-display' id='saved_item-3'>
+          <div class='saved_item-cb saved_item-cb-no-selected saved_item-cb-close' id='saved_item-cb-3'>
+            <input type='checkbox' id='saved_item-check-3' />
+          </div>
+      <div class='saved_item-name' id='saved_item-name-3'></div><br><br>
+      <div class='saved_item-PartAmount' id='saved_item-PartAmount-3'></div>
+      <div class='saved_item-start-btn btn_uiColor' id='saved_item-start-btn-3'></div>
+      <div class='saved_item-edit-btn bgDark_uiColor' id='saved_item-edit-btn-3'></div>
+      <div class='saved_item-delete-btn bgDark_uiColor' id='saved_item-delete-btn-3'></div>
+    </div>
+
+    <div class='saved_item-info-btn' id='saved_item-info-btn-4'></div>
+    <div class='fnt_uiColor bgDark_uiColor saved_item no-display' id='saved_item-4'>
+          <div class='saved_item-cb saved_item-cb-no-selected saved_item-cb-close' id='saved_item-cb-4'>
+            <input type='checkbox' id='saved_item-check-4' />
+          </div>
+      <div class='saved_item-name' id='saved_item-name-4'></div><br><br>
+      <div class='saved_item-PartAmount' id='saved_item-PartAmount-4'></div>
+      <div class='saved_item-start-btn btn_uiColor' id='saved_item-start-btn-4'></div>
+      <div class='saved_item-edit-btn bgDark_uiColor' id='saved_item-edit-btn-4'></div>
+      <div class='saved_item-delete-btn bgDark_uiColor' id='saved_item-delete-btn-4'></div>
+    </div>
+
+    <div class='saved_item-info-btn' id='saved_item-info-btn-5'></div>
+    <div class='fnt_uiColor bgDark_uiColor saved_item no-display' id='saved_item-5'>
+          <div class='saved_item-cb saved_item-cb-no-selected saved_item-cb-close' id='saved_item-cb-5'>
+            <input type='checkbox' id='saved_item-check-5' />
+          </div>
+      <div class='saved_item-name' id='saved_item-name-5'></div><br><br>
+      <div class='saved_item-PartAmount' id='saved_item-PartAmount-5'></div>
+      <div class='saved_item-start-btn btn_uiColor' id='saved_item-start-btn-5'></div>
+      <div class='saved_item-edit-btn bgDark_uiColor' id='saved_item-edit-btn-5'></div>
+      <div class='saved_item-delete-btn bgDark_uiColor' id='saved_item-delete-btn-5'></div>
+    </div>
+
+    <div class='saved_item-info-btn' id='saved_item-info-btn-6'></div>
+    <div class='fnt_uiColor bgDark_uiColor saved_item no-display' id='saved_item-6'>
+          <div class='saved_item-cb saved_item-cb-no-selected saved_item-cb-close' id='saved_item-cb-6'>
+            <input type='checkbox' id='saved_item-check-6' />
+          </div>
+      <div class='saved_item-name' id='saved_item-name-6'></div><br><br>
+      <div class='saved_item-PartAmount' id='saved_item-PartAmount-6'></div>
+      <div class='saved_item-start-btn btn_uiColor' id='saved_item-start-btn-6'></div>
+      <div class='saved_item-edit-btn bgDark_uiColor' id='saved_item-edit-btn-6'></div>
+      <div class='saved_item-delete-btn bgDark_uiColor' id='saved_item-delete-btn-6'></div>
+    </div>
+
+    <div class='saved_item-info-btn' id='saved_item-info-btn-7'></div>
+    <div class='fnt_uiColor bgDark_uiColor saved_item no-display' id='saved_item-7'>
+          <div class='saved_item-cb saved_item-cb-no-selected saved_item-cb-close' id='saved_item-cb-7'>
+            <input type='checkbox' id='saved_item-check-7' />
+          </div>
+      <div class='saved_item-name' id='saved_item-name-7'></div><br><br>
+      <div class='saved_item-PartAmount' id='saved_item-PartAmount-7'></div>
+      <div class='saved_item-start-btn btn_uiColor' id='saved_item-start-btn-7'></div>
+      <div class='saved_item-edit-btn bgDark_uiColor' id='saved_item-edit-btn-7'></div>
+      <div class='saved_item-delete-btn bgDark_uiColor' id='saved_item-delete-btn-7'></div>
+    </div>
+
+    <div class='saved_item-info-btn' id='saved_item-info-btn-8'></div>
+    <div class='fnt_uiColor bgDark_uiColor saved_item no-display' id='saved_item-8'>
+          <div class='saved_item-cb saved_item-cb-no-selected saved_item-cb-close' id='saved_item-cb-8'>
+            <input type='checkbox' id='saved_item-check-8' />
+          </div>
+      <div class='saved_item-name' id='saved_item-name-8'></div><br><br>
+      <div class='saved_item-PartAmount' id='saved_item-PartAmount-8'></div>
+      <div class='saved_item-start-btn btn_uiColor' id='saved_item-start-btn-8'></div>
+      <div class='saved_item-edit-btn bgDark_uiColor' id='saved_item-edit-btn-8'></div>
+      <div class='saved_item-delete-btn bgDark_uiColor' id='saved_item-delete-btn-8'></div>
+    </div>
+
+    <div class='saved_item-info-btn' id='saved_item-info-btn-9'></div>
+    <div class='fnt_uiColor bgDark_uiColor saved_item no-display' id='saved_item-9'>
+          <div class='saved_item-cb saved_item-cb-no-selected saved_item-cb-close' id='saved_item-cb-9'>
+            <input type='checkbox' id='saved_item-check-9' />
+          </div>
+      <div class='saved_item-name' id='saved_item-name-9'></div><br><br>
+      <div class='saved_item-PartAmount' id='saved_item-PartAmount-9'></div>
+      <div class='saved_item-start-btn btn_uiColor' id='saved_item-start-btn-9'></div>
+      <div class='saved_item-edit-btn bgDark_uiColor' id='saved_item-edit-btn-9'></div>
+      <div class='saved_item-delete-btn bgDark_uiColor' id='saved_item-delete-btn-9'></div>
+    </div>
+
+    <div class='saved_item-info-btn' id='saved_item-info-btn-10'></div>
+    <div class='fnt_uiColor bgDark_uiColor saved_item no-display' id='saved_item-10'>
+          <div class='saved_item-cb saved_item-cb-no-selected saved_item-cb-close' id='saved_item-cb-10'>
+            <input type='checkbox' id='saved_item-check-10' />
+          </div>
+      <div class='saved_item-name' id='saved_item-name-10'></div><br><br>
+      <div class='saved_item-PartAmount' id='saved_item-PartAmount-10'></div>
+      <div class='saved_item-start-btn btn_uiColor' id='saved_item-start-btn-10'></div>
+      <div class='saved_item-edit-btn bgDark_uiColor' id='saved_item-edit-btn-10'></div>
+      <div class='saved_item-delete-btn bgDark_uiColor' id='saved_item-delete-btn-10'></div>
+    </div>
+  </div>
+      <button id='saved_item-selectAll' class='saved_item-selectAll btn_uiColor no-display' onclick='sg_selectAll()'>Selecionar tudo</button>
+</div>
+
+
+<div id='head_orTales' class='page close lock-scroll'>
+<br>
+<center>
+<div class='flip-container tip' onmousedown='ccStart()'>
+	<div class='flipper'>
+		<div class='cara'></div>
+		<div class='coroa'></div>
+	</div>
+</div>
+</center>
+<p>Clique/toque na moeda para girá-la.</p>
+<div class='sg_SavedRaffles_Btn'>
+  <button class='btn_uiColor saved-raffle-button saved-raffle-button-home-back' onclick='go_Home()'></button>
+</div>
+</div><!-- #head_orTales -->
+
+
+
+<div id='sg_About' class='page close lock-scroll'>
+  <div class='sg_SavedRaffles_Btn'>
+    <button class='btn_uiColor saved-raffle-button saved-raffle-button-config-back' onclick='closeAbout()'></button>
+    <button class='btn_uiColor saved-raffle-button saved-raffle-button-home' onclick='go_Home()'></button>
+  </div>
+  <div id='sg_aboutText' class='fnt_uiColor bgDark_uiColor'></div>
+</div><!-- #sg_About -->
+
+
+
+
+<div id='sg_Config_Page' class='page close lock-scroll bg_uiColor'>
+  <button id='sg_Config_Page-close' class='btn_uiColor' onclick='closeConfig()'></button>
+  <div id='sg_Config_Page-title' class='bd_fntColor'>Configurações</div>
+<div class='sg_Page-holder'>
+  <ul>
+    <label>Icone de vencedor</label>
+    <br><br><br>
+      <div id='sg_Config-winIcon-Trophy' class='sg_Config-winIcon sg_Config-winIcon-Trophy'></div>
+      <div id='sg_Config-winIcon-Heart' class='sg_Config-winIcon sg_Config-winIcon-Heart'></div>
+      <div id='sg_Config-winIcon-Star' class='sg_Config-winIcon sg_Config-winIcon-Star'></div>
+      <div id='sg_Config-winIcon-Sun' class='sg_Config-winIcon sg_Config-winIcon-Sun'></div>
+
+    <br><br><br>
+
+    <div>
+      <input type='checkbox' id='sg_Config-DecCb' class='sg_Config-Cb' /> <label for='sg_Config-DecCb' class='bd_ftnColor'>Decoração de fundo</label>
+    </div>
+
+    <br><br>
+
+    <div id='sg_Config-bgDiv'>
+      <div id='sg_Config-bg-Flowers' class='sg_Config-bg sg_Config-bg-Flowers'></div>
+      <div id='sg_Config-bg-Leaves' class='sg_Config-bg sg_Config-bg-Leaves'></div>
+      <div id='sg_Config-bg-Ducks' class='sg_Config-bg sg_Config-bg-Ducks'></div>
+      <div id='sg_Config-bg-Bfs' class='sg_Config-bg sg_Config-bg-Bfs'></div>
+    </div>
+    <br>
+
+    <div>
+      <input type='checkbox' id='sg_Config-TipsCb' class='sg_Config-Cb' /> <label for='sg_Config-TipsCb' class='bd_ftnColor'>Destaque de ajuda</label>
+    </div>
+    <br>
+    <div class='sidebar-op sidebar-op-4' onclick='About()'><label>Sobre o App</label></div>
+  </ul>
+</div>
+</div>
+
+
+
+<div id="notifica-dica" class="no-display">
+<div class="dica"></div>
+<div class="dica-texto">Dica!</div>
+</div>
 
 </div><!-- #content -->
 
-<script src='js/sortegram.dev.js'></script>
+<script src='js/sg.bootstrap.js'></script>
+
+<div id='scrptLoad'>
+<script id='script' src='js/sortegram.dev.js'></script>
+</div>
+
+<script src='js/sg.pages.js'></script>
+<script src='js/sg.sortegram.js'></script>
+<script src='js/sg.classic.js'></script>
+<script src='js/sg.headortales.js'></script>
+<script src='js/sg.color.js'></script>
+<script src='js/jquery.mCustomScrollbar.concat.min.js'></script>
+
 </body>
 </html>

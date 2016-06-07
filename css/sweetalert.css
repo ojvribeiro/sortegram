@@ -5,9 +5,9 @@ body.stop-scrolling {
 .sweet-overlay {
   background-color: black;
   /* IE8 */
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
   /* IE8 */
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.9);
   position: fixed;
   left: 0;
   right: 0;
@@ -21,7 +21,6 @@ body.stop-scrolling {
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   width: 478px;
   padding: 17px;
-  border-radius: 5px;
   text-align: center;
   position: fixed;
   left: 50%;
@@ -36,8 +35,9 @@ body.stop-scrolling {
       width: auto;
       margin-left: 0;
       margin-right: 0;
-      left: 15px;
-      right: 15px; } }
+      margin-top: -255px !important;
+      left: 0;
+      right: 0; } }
   .sweet-alert h2 {
     color: #575757;
     font-size: 30px;
@@ -50,7 +50,7 @@ body.stop-scrolling {
     line-height: 40px;
     display: block; }
   .sweet-alert p {
-    color: #797979;
+    color: #797979 !important;
     font-size: 16px;
     text-align: center;
     font-weight: 300;
@@ -121,6 +121,9 @@ body.stop-scrolling {
       transform: rotate(45deg); }
     .sweet-alert .sa-input-error.show {
       opacity: 1;
+      background-color: #FFF;
+      padding: 5px;
+      margin: -5px -10px 0 0;
       -webkit-transform: scale(1);
       transform: scale(1); }
   .sweet-alert input {
@@ -179,7 +182,7 @@ body.stop-scrolling {
     -webkit-border-radius: 4px;
     border-radius: 5px;
     padding: 10px 32px;
-    margin: 26px 5px 0 5px;
+    margin: 10px 5px 0 5px;
     cursor: pointer; }
     .sweet-alert button:focus {
       outline: none;
@@ -189,7 +192,7 @@ body.stop-scrolling {
     .sweet-alert button:active {
       background-color: #5dc2f1; }
     .sweet-alert button.cancel {
-      background-color: #C1C1C1; }
+      background-color: #777777; }
       .sweet-alert button.cancel:hover {
         background-color: #b9b9b9; }
       .sweet-alert button.cancel:active {
