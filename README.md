@@ -1,6 +1,6 @@
-![sg-icon-32](https://cloud.githubusercontent.com/assets/8026741/15939603/d239dba4-2e4e-11e6-8ef5-58e03ecf8e36.png) Sortegram
+![sg-logo-d](https://cloud.githubusercontent.com/assets/16294628/15943269/9f64d1ec-2e5e-11e6-87e0-bd7ce13c9776.png)
 ====
-Um aplicativo HTML5 para sorteios em geral. Sorteie números, nomes ou jogue Cara ou Coroa.
+O **Sortegram** é um aplicativo HTML5 para sorteios em geral. Sorteie números, nomes ou jogue Cara ou Coroa.
 
 
 Usando o app
@@ -11,7 +11,10 @@ ou
 
 Baixe a última versão do App para Android (apk) [aqui](https://github.com/sortegram/sortegram/releases).
 
-![sg-logo-d](https://cloud.githubusercontent.com/assets/16294628/15942881/cafed016-2e5c-11e6-9683-02748101e88d.png)
+
+Bugs
+====
+Encontrou algum bug no app? Vai ser ótimo se você [deixar um feedback](https://github.com/sortegram/sortegram/issues).
 
 Changelog
 ====
