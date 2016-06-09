@@ -35,8 +35,8 @@ v2.0.0
 
 Autor
 ====
-Victor Ribeiro
+Victor Ribeiro: [@_jvribeiro](http://twitter.com/_jvribeiro)
 
 Licença
 ====
-MIT [leia a licensa](https://github.com/sortegram/sortegram/blob/master/LICENSE)
+MIT ([leia a licensa](https://github.com/sortegram/sortegram/blob/master/LICENSE)).
