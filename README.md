@@ -1,44 +1,39 @@
-Versão do aplicativo: v2.0.0
-Autor: Victor 'JV' Ribeiro
+![sg-icon-32](https://cloud.githubusercontent.com/assets/8026741/15939603/d239dba4-2e4e-11e6-8ef5-58e03ecf8e36.png) Sortegram
+====
+Um aplicativo HTML5 para sorteios em geral. Sorteie números, nomes ou jogue Cara ou Coroa.
 
 
+Usando o app
+====
+Acesse o aplicativo em sua versão online em [Sortegram.com](http://sortegram.com).
 
+ou
+
+Baixe a última versão do App para Android (apk) [aqui](https://github.com/sortegram/sortegram/releases).
+
+![sg-logo-d](https://cloud.githubusercontent.com/assets/16294628/15942881/cafed016-2e5c-11e6-9683-02748101e88d.png)
 
 Changelog
-
+====
 v2.0.0
-* Adicionada a funcionalidade de adicionar ate´ 10 sorteios individuais
-* Melhoria nas cores
-* Consertado o bug no Claro/Escuro onde voce tinha que selecionar novamente
-  a cor ou reiniciar o app.
-* Melhoria no desempenho para sorteios com mais de 1000 participantes
-* Adicionado o ativar/desativar arroba (@) na pagina de edicao
-  + Essencial para validacao de usernames de Instagram e Twitter
-* Agora voce pode escolher entre sortear um ganhador ou varios
-  + O numero maximo de ganhadores e´ igual ao numero de participantes e
-    o minimo 2.
-* Adicionadas novas animacoes
-* Leve repaginacao da interface
-* Adicionado menu de configuracoes gerais
-* Changelog adicionado ao menu Configuracoes
+----
+* Adicionada a funcionalidade de adicionar até 10 sorteios individuais;
+* Melhoria nas cores;
+* Consertado o bug no Claro/Escuro onde você tinha que selecionar novamente a cor ou reiniciar o app;
+* Melhoria no desempenho para sorteios com mais de 1000 participantes;
+* Adicionado o ativar/desativar arroba (@) na página de edição
+  + Essencial para validação de usernames de Instagram e Twitter;
+* Agora você pode escolher entre sortear um ganhador ou vários
+  + O número máximo de ganhadores é igual ao número de participantes e o mínimo 2;
+* Adicionadas novas animações;
+* Leve repaginação da interface;
+* Adicionado menu de configurações gerais;
+* Changelog adicionado ao menu Configurações > Sobre o App;
 
+Autor
+====
+Victor Ribeiro
 
-Bugs conhecidos no apk hibrido
-
-v2.0.0
-* Transicao para a pagina "Novo sorteio" de fadeIn, em vez de slide.
-  + Causa provavel: Ao entrar nesta pagina e´ colocado automaticamente
-    um focus() no campo input_UserName. Isso faz com que a transicao
-    gaste mais memoria e a transicao muda.
-  + Solução possivel: Adicionar um timeout de pelo menos 1500ms ao focus().
-
-* Botoes de editar, excluir e sortear da página "Sorteios salvos" sao
-  mostrados com alinhamento vertical errado (um pouco mais acima).
-
-* Moeda do "Cara ou Coroa" mostra apenas o lado "cara", apesar de a barra
-  de status superior dar resultados corretos.
-  + Nao tenho ainda solucao ou ideia do que fazer para contornar isto.
-
-* Ao estar nos modos "Cara ou Coroa" ou "Números", ao apertar o botao "Novo sorteio",
-  aparecem ambas as telas ao mesmo tempo.
-  + Causa provavel: O mesmo problema do primeiro item (o focus).
+Licença
+====
+MIT [leia a licensa](https://github.com/sortegram/sortegram/blob/master/LICENSE)
