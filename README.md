@@ -5,7 +5,7 @@ O **Sortegram** é um aplicativo HTML5 para sorteios em geral. Sorteie números,
 
 Usando o app
 ====
-Acesse o aplicativo em sua versão online em [Sortegram.com](http://sortegram.github.io).
+Acesse o aplicativo em sua versão online [aqui](http://sortegram.github.io).
 
 ou
 
