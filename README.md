@@ -39,4 +39,4 @@ Victor Ribeiro: [@ojvribeiro](http://github.com/ojvribeiro)
 
 Licença
 ====
-MIT ([leia a licensa](https://github.com/sortegram/sortegram/blob/master/LICENSE)).
+MIT ([leia a licença](https://github.com/sortegram/sortegram/blob/master/LICENSE)).
